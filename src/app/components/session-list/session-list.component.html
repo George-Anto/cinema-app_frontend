@@ -1,0 +1,59 @@
+<div class="screen">
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+  <div class="center"><h1>Sessions Available</h1></div>
+  <mat-accordion multi="true" *ngIf="sessions.length > 0">
+    <mat-expansion-panel *ngFor="let session of sessions">
+      <mat-expansion-panel-header>
+        <mat-panel-title
+          ><b>{{ session.name }}</b></mat-panel-title
+        >
+      </mat-expansion-panel-header>
+      <mat-list>
+        <mat-list-item>
+          <b>movie</b> : {{ session.movie.title | titlecase }}
+        </mat-list-item>
+
+        <mat-list-item>
+          <b>cinema</b> : {{ session.cinema.name | titlecase }}
+        </mat-list-item>
+
+        <mat-list-item>
+          <b>startDate</b> :
+          {{ session.startDate.toString().substring(0, 10) }}
+        </mat-list-item>
+
+        <mat-list-item>
+          <b>startTime</b> : {{ session.startTime }}
+        </mat-list-item>
+
+        <mat-list-item> <b>code</b> : {{ session.code }} </mat-list-item>
+      </mat-list>
+      <mat-action-row>
+        <button mat-button color="primary" (click)="onBookSession(session)">
+          BOOK TICKETS
+        </button>
+        <button
+          mat-button
+          color="primary"
+          *ngIf="isAdmin"
+          (click)="onEditSession(session)"
+        >
+          EDIT
+        </button>
+        <button
+          mat-button
+          color="warn"
+          *ngIf="isAdmin"
+          (click)="onDelete(session._id)"
+        >
+          DELETE
+        </button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <p *ngIf="sessions.length <= 0 && !isLoading">No sessions added yet!</p>
+  <div *ngIf="isLoading">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+</div>

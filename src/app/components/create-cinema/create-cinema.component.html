@@ -1,0 +1,162 @@
+<div class="screen">
+  <mat-card>
+    <h1>Create a new Cinema hall</h1>
+    <form (submit)="onCreateCinema()" #cinemaForm="ngForm">
+      <mat-form-field>
+        <input
+          matInput
+          type="string"
+          name="name"
+          placeholder="name"
+          ngModel
+          required
+          #name="ngModel"
+        />
+        <mat-error *ngIf="name.invalid">Please enter a valid name.</mat-error>
+      </mat-form-field>
+      <br />
+
+      <!-- <mat-form-field>
+      <input
+        matInput
+        type="string"
+        name="photo"
+        placeholder="photo"
+        ngModel
+        required
+        #photo="ngModel"
+      />
+      <mat-error *ngIf="photo.invalid">Please enter a valid photo</mat-error>
+    </mat-form-field>
+    <br /> -->
+
+      <mat-form-field>
+        <input
+          matInput
+          type="number"
+          name="code"
+          placeholder="code"
+          ngModel
+          required
+          #code="ngModel"
+        />
+        <mat-error *ngIf="code.invalid">Please enter a valid code.</mat-error>
+      </mat-form-field>
+      <br />
+
+      <!-- <mat-form-field>
+      <input
+      matInput
+      type="number"
+      name="seatsLayout"
+      placeholder="seatsLayout"
+      ngModel
+        required
+        #seatsLayout="ngModel"
+      />
+      <mat-error *ngIf="seatsLayout.invalid"
+        >Please enter a valid seatsLayout</mat-error
+      >
+    </mat-form-field>
+    <br /> -->
+
+      <!-- <input type="range" min="0" max="100" #ranger (input)="(ranger.value)"> -->
+
+      <!-- <mat-form-field>
+      <input
+      matInput
+      type="number"
+      min="0"
+      max="80"
+        name="seatsAvailable"
+        placeholder="seatsAvailable"
+        ngModel
+        required
+        #seatsAvailable="ngModel"
+        />
+      <mat-error *ngIf="seatsAvailable.invalid"
+      >Please enter a valid Available Seats number</mat-error
+      >
+    </mat-form-field>
+    <br /> -->
+
+      <mat-form-field>
+        <input
+          matInput
+          type="date"
+          name="startDate"
+          placeholder="startDate"
+          ngModel
+          required
+          #startDate="ngModel"
+        />
+        <mat-error *ngIf="startDate.invalid"
+          >Please enter a valid start date.</mat-error
+        >
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <input
+          matInput
+          type="date"
+          name="endDate"
+          placeholder="endDate"
+          ngModel
+          required
+          #endDate="ngModel"
+        />
+        <mat-error *ngIf="endDate.invalid"
+          >Please enter a valid end date.
+        </mat-error>
+      </mat-form-field>
+      <br />
+      <div>Active:</div>
+      <div class="radio" *ngFor="let status of statuses">
+        <label>
+          <input
+            type="radio"
+            name="status"
+            ngModel
+            [value]="status"
+            required
+            #status="ngModel"
+          />
+        </label>
+        {{ status }}
+      </div>
+      <br />
+      <div class="buttons">
+        <button
+          mat-raised-button
+          color="basic"
+          type="button"
+          routerLink="/main-menu/dashboard"
+          class="button-back"
+        >
+          Back
+        </button>
+        <button
+          mat-raised-button
+          color="accent"
+          type="submit"
+          [disabled]="!cinemaForm.valid"
+        >
+          Create Cinema hall
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>
+<br />
+<div class="screen">
+  <div *ngIf="isLoading" class="spinner center">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+  <div *ngIf="error" class="alert alert-danger" style="text-align: center">
+    {{ error }}
+  </div>
+  <div *ngIf="success" class="alert alert-success" style="text-align: center">
+    {{ success }}
+  </div>
+</div>

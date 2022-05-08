@@ -1,0 +1,45 @@
+<div class="screen">
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+  <div class="center"><h1>Cinema halls Available</h1></div>
+  <mat-accordion multi="true" *ngIf="cinemas.length > 0">
+    <mat-expansion-panel *ngFor="let cinema of cinemas">
+      <mat-expansion-panel-header>
+        <mat-panel-title
+          ><b>{{ cinema.name }}</b></mat-panel-title
+        >
+      </mat-expansion-panel-header>
+      <mat-list>
+        <mat-list-item> <b>photo</b> : {{ cinema.photo }} </mat-list-item>
+
+        <mat-list-item> <b>code</b> : {{ cinema.code }} </mat-list-item>
+
+        <mat-list-item>
+          <b>seatsAvailable</b> : {{ cinema.seatsAvailable }}
+        </mat-list-item>
+
+        <mat-list-item>
+          <b>Start Date</b> : {{ cinema.startDate.toString().substring(0, 10) }}
+        </mat-list-item>
+
+        <mat-list-item>
+          <b>End Date</b> : {{ cinema.endDate.toString().substring(0, 10) }}
+        </mat-list-item>
+
+        <mat-list-item> <b>Active</b> : {{ cinema.active }} </mat-list-item>
+      </mat-list>
+      <mat-action-row *ngIf="isAdmin">
+        <button mat-button color="primary" (click)="onEditCinema(cinema)">
+          EDIT
+        </button>
+        <button mat-button color="warn" (click)="onDelete(cinema._id)">
+          DELETE
+        </button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <p *ngIf="cinemas.length <= 0 && !isLoading">No cinema halls added yet!</p>
+  <div *ngIf="isLoading">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+</div>

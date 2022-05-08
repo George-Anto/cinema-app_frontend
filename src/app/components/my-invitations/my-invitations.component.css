@@ -1,0 +1,40 @@
+.screen {
+  margin-left: 6rem;
+  width: 70%;
+  margin-top: 100px;
+  position: relative;
+  height: fit-content;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.tickets {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  font-family: 'Poppins', sans-serif;
+}
+
+.ticket {
+  background-color: #eeeeee;
+  color: #444;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 2rem;
+  border: 1px solid #444;
+  filter: drop-shadow(5px 5px 6px #aaaaaa);
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}

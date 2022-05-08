@@ -1,0 +1,84 @@
+<div style="font-family: 'Poppins', sans-serif">
+  <div *ngIf="myInvitations.length > 0" class="title">
+    <h2 style="color: #444">My Movie Tickets</h2>
+  </div>
+  <div *ngIf="myInvitations.length > 0" class="tickets">
+    <div *ngFor="let myInvitation of myInvitations" class="ticket">
+      <div class="center">
+        <h2>Movie Ticket</h2>
+      </div>
+      <b>Session</b>: {{ myInvitation.session.name | titlecase }}
+      <br />
+      <b>Movie</b>: {{ myInvitation.movie.title | titlecase }}
+      <br />
+      <b>Cinema hall</b>: {{ myInvitation.cinema.name | titlecase }}
+      <br />
+      <b>Date</b>: {{ myInvitation.sessionDate.toString().substring(0, 10) }}
+      <br />
+      <b>Time</b>: {{ myInvitation.sessionTime }}
+      <br />
+      <b>Seat</b>: {{ myInvitation.seat + 1 }}, <b>Row</b>:
+      {{ myInvitation.row + 1 }}
+      <br />
+      <br />
+      <div class="button">
+        <button
+          class="btn btn-secondary"
+          type="button"
+          (click)="onCheckIn(myInvitation)"
+        >
+          Check In
+        </button>
+      </div>
+    </div>
+  </div>
+  <br />
+  <div class="center">
+    <div *ngIf="isLoading" class="spinner center">
+      <app-loading-spinner></app-loading-spinner>
+    </div>
+    <div *ngIf="error" class="alert alert-danger">
+      {{ error }}
+    </div>
+    <div *ngIf="success" class="alert alert-success">
+      {{ success }}
+    </div>
+  </div>
+  <div *ngIf="myGuestsInvitations.length > 0" class="title">
+    <h2>My Guests' Movie Tickets</h2>
+  </div>
+  <div *ngIf="myGuestsInvitations.length > 0" style="text-align: center">
+    Your guests must check in when arriving to the cinema for the movie.
+  </div>
+  <div *ngIf="myInvitations.length > 0" class="tickets">
+    <div *ngFor="let myGuestInvitation of myGuestsInvitations" class="ticket">
+      <div class="center">
+        <h2>Movie Ticket</h2>
+      </div>
+      <b>Guests's Email</b>: {{ myGuestInvitation.email }}
+      <br />
+      <b>Session</b>:
+      {{ myGuestInvitation.session.name | titlecase }}
+      <br />
+      <b>Movie</b>: {{ myGuestInvitation.movie.title | titlecase }}
+      <br />
+      <b>Cinema hall</b>: {{ myGuestInvitation.cinema.name | titlecase }}
+      <br />
+      <b>Date</b>:
+      {{ myGuestInvitation.sessionDate.toString().substring(0, 10) }}
+      <br />
+      <b>Time</b>: {{ myGuestInvitation.sessionTime }}
+      <br />
+      <b>Seat</b>: {{ myGuestInvitation.seat + 1 }}, <b>Row</b>:
+      {{ myGuestInvitation.row + 1 }}
+      <br />
+    </div>
+  </div>
+  <div
+    *ngIf="!(myInvitations.length > 0)"
+    class="alert alert-danger screen"
+    style="text-align: center"
+  >
+    <h2>You have not booked any movie tickets for you or any guests so far.</h2>
+  </div>
+</div>

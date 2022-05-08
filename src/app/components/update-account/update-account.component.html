@@ -1,0 +1,147 @@
+<div class="screen">
+  <h1>Update Account Information</h1>
+  <div class="center">
+    Here you can update some or all of your accounts's informations. You can
+    take these actions as many times as you want.
+  </div>
+  <div class="center">Your username and mobile phone can NOT be updated.</div>
+  <br />
+  <form [formGroup]="updateAccountForm" (ngSubmit)="onSubmit()">
+    <label>Firstname</label><br />
+    <input
+      class="form-control"
+      type="text"
+      id="name"
+      placeholder="Your firstname"
+      name="name"
+      formControlName="name"
+    />
+    <span
+      class="help"
+      [ngClass]="{
+        hidden:
+          updateAccountForm.get('name').valid ||
+          !updateAccountForm.get('name').touched
+      }"
+      >Firstname can not be empty</span
+    >
+    <br />
+    <label>Lastname</label><br />
+    <input
+      class="form-control"
+      type="text"
+      id="surname"
+      placeholder="Your lastname"
+      name="surname"
+      formControlName="surname"
+    />
+    <span
+      class="help"
+      [ngClass]="{
+        hidden:
+          updateAccountForm.get('surname').valid ||
+          !updateAccountForm.get('surname').touched
+      }"
+      >Lastame can not be empty</span
+    >
+    <br />
+    <label>Username</label><br />
+    <input
+      class="form-control"
+      type="text"
+      id="username"
+      placeholder="A unique username"
+      name="username"
+      formControlName="username"
+    />
+    <span
+      class="help"
+      [ngClass]="{
+        hidden:
+          updateAccountForm.get('username').valid ||
+          !updateAccountForm.get('username').touched
+      }"
+      >Username can not be empty</span
+    >
+    <br />
+    <label>Email</label><br />
+    <input
+      class="form-control"
+      type="email"
+      id="email"
+      placeholder="A unique email"
+      name="email"
+      formControlName="email"
+      required
+    />
+    <span
+      class="help"
+      [ngClass]="{
+        hidden:
+          updateAccountForm.get('email').valid ||
+          !updateAccountForm.get('email').touched
+      }"
+      >Email can not be empty</span
+    >
+    <br />
+    <label>Mobile phone</label><br />
+    <input
+      class="form-control"
+      type="text"
+      id="phone"
+      placeholder="A unique mobile phone"
+      name="mobilePhone"
+      formControlName="mobilePhone"
+    />
+    <span
+      class="help"
+      [ngClass]="{
+        hidden:
+          updateAccountForm.get('mobilePhone').valid ||
+          !updateAccountForm.get('mobilePhone').touched
+      }"
+      >Mobile phone can not be empty</span
+    >
+    <br />
+    <div>Your photo</div>
+    <div class="image" *ngIf="imagePreview">
+      <img [src]="imagePreview" [alt]="userData.surname" />
+    </div>
+    <br />
+    <button type="button" mat-stroked-button (click)="pickFile.click()">
+      Upload new Photo
+    </button>
+    <input
+      type="file"
+      (change)="onPickImage($event)"
+      style="visibility: hidden"
+      #pickFile
+    />
+    <br />
+    <br />
+    <div class="buttons-align">
+      <input
+        routerLink="/main-menu/dashboard"
+        class="btn btn-secondary"
+        type="button"
+        value="Back"
+      />
+      <input
+        class="btn btn-success"
+        type="submit"
+        value="Update Info"
+        [disabled]="!updateAccountForm.valid"
+      />
+    </div>
+    <br />
+  </form>
+  <div *ngIf="isLoading" class="spinner">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+  <div *ngIf="error" class="center alert alert-danger">
+    {{ error }}
+  </div>
+  <div *ngIf="success" class="center alert alert-success">
+    {{ success }}
+  </div>
+</div>

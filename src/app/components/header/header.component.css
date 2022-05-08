@@ -1,0 +1,7 @@
+.position {
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  z-index: 999999;
+  top: 0;
+}

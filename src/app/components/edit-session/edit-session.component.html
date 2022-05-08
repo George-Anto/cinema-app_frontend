@@ -1,0 +1,126 @@
+<div class="screen">
+  <div *ngIf="!noSession">
+    <mat-card>
+      <h1>Edit current Session</h1>
+      <form (submit)="onEditSession()" #sessionEditForm="ngForm">
+        <mat-form-field>
+          <input
+            matInput
+            type="number"
+            name="code"
+            placeholder="code"
+            [ngModel]="currentSession.code"
+            required
+            #code="ngModel"
+          />
+          <mat-error *ngIf="code.invalid">Please enter a valid code</mat-error>
+        </mat-form-field>
+        <br />
+
+        <mat-form-field>
+          <input
+            matInput
+            type="string"
+            name="name"
+            placeholder="name"
+            [ngModel]="currentSession.name"
+            required
+            #name="ngModel"
+          />
+          <mat-error *ngIf="name.invalid">Please enter a valid name</mat-error>
+        </mat-form-field>
+        <br />
+
+        <mat-form-field>
+          <input
+            matInput
+            type="date"
+            name="startDate"
+            placeholder="startDate"
+            [ngModel]="currentSession.startDate.toString().substring(0, 10)"
+            required
+            #startDate="ngModel"
+          />
+          <mat-error *ngIf="startDate.invalid"
+            >Please enter a valid startDate</mat-error
+          >
+        </mat-form-field>
+        <br />
+
+        <mat-form-field>
+          <input
+            matInput
+            type="time"
+            name="startTime"
+            placeholder="startTime"
+            [ngModel]="currentSession.startTime"
+            required
+            #startTime="ngModel"
+          />
+          <mat-error *ngIf="startTime.invalid"
+            >Please enter a valid startTime</mat-error
+          >
+        </mat-form-field>
+        <br />
+        <br />
+
+        <!-- <h4>Select a <b>Movie</b></h4> -->
+        <mat-form-field appearance="fill">
+          <mat-label>Movie</mat-label>
+          <mat-select [(ngModel)]="selectedMovie" name="movie" required>
+            <mat-option *ngFor="let movie of movies" [value]="movie._id">
+              {{ movie.title }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!-- <p>Selected Cinema: {{ selectedMovie }}</p> -->
+
+        <br /><br />
+
+        <!-- <h4>Select a <b>Cinema</b></h4> -->
+        <mat-form-field appearance="fill">
+          <mat-label>Cinema</mat-label>
+          <mat-select [(ngModel)]="selectedCinema" name="cinema" required>
+            <mat-option *ngFor="let cinema of cinemas" [value]="cinema._id">
+              {{ cinema.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!-- <p>Selected Cinema: {{ selectedCinema }}</p> -->
+        <br />
+        <div class="buttons">
+          <button
+            mat-raised-button
+            color="basic"
+            type="button"
+            routerLink="/main-menu/session-list"
+            class="button-back"
+          >
+            Back
+          </button>
+          <button
+            mat-raised-button
+            color="accent"
+            type="submit"
+            [disabled]="!sessionEditForm.valid"
+          >
+            Edit Session
+          </button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+  <br />
+  <div *ngIf="isLoading" class="spinner center">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+  <div *ngIf="error" class="alert alert-danger" style="text-align: center">
+    {{ error }}
+  </div>
+  <div *ngIf="success" class="alert alert-success" style="text-align: center">
+    {{ success }}
+  </div>
+  <div *ngIf="noSession" class="alert alert-danger" style="margin-top: 10rem">
+    <h1>Please select a Session to edit through Session list screen!</h1>
+  </div>
+</div>

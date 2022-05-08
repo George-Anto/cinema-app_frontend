@@ -1,0 +1,166 @@
+<div class="signup-screen">
+  <div class="form-border">
+    <h1>Sign up</h1>
+    <form (ngSubmit)="onSubmit()" #signupForm="ngForm">
+      <label>Firstname</label><br />
+      <input
+        class="form-control"
+        type="text"
+        id="name"
+        placeholder="Your firstname"
+        ngModel
+        name="name"
+        required
+        #name="ngModel"
+      />
+      <span class="help" [ngClass]="{ hidden: name.valid || !name.touched }"
+        >Firstname can not be empty</span
+      >
+      <br />
+      <label>Lastname</label><br />
+      <input
+        class="form-control"
+        type="text"
+        id="surname"
+        placeholder="Your lastname"
+        ngModel
+        name="surname"
+        required
+        #surname="ngModel"
+      />
+      <span
+        class="help"
+        [ngClass]="{ hidden: surname.valid || !surname.touched }"
+        >Lastame can not be empty</span
+      >
+      <br />
+      <label>Username</label><br />
+      <input
+        class="form-control"
+        type="text"
+        id="username"
+        placeholder="A unique username"
+        ngModel
+        name="username"
+        required
+        #username="ngModel"
+      />
+      <span
+        class="help"
+        [ngClass]="{ hidden: username.valid || !username.touched }"
+        >Username can not be empty</span
+      >
+      <br />
+      <label>Email</label><br />
+      <input
+        class="form-control"
+        type="email"
+        id="email"
+        placeholder="A unique email"
+        ngModel
+        name="email"
+        required
+        email
+        #email="ngModel"
+      />
+      <span class="help" [ngClass]="{ hidden: email.valid || !email.touched }"
+        >Email can not be empty</span
+      >
+      <br />
+      <label>Mobile phone</label><br />
+      <input
+        class="form-control"
+        type="text"
+        id="phone"
+        placeholder="A unique mobile phone"
+        ngModel
+        name="mobilePhone"
+        required
+        #mobilePhone="ngModel"
+      />
+      <span
+        class="help"
+        [ngClass]="{ hidden: mobilePhone.valid || !mobilePhone.touched }"
+        >Mobile phone can not be empty</span
+      >
+      <br />
+      <label>Password</label><br />
+      <input
+        class="form-control"
+        type="password"
+        id="password"
+        placeholder="At least 8 characters password"
+        ngModel
+        name="password"
+        required
+        #password="ngModel"
+      />
+      <span
+        class="help"
+        [ngClass]="{ hidden: password.valid || !password.touched }"
+        >Password can not be empty</span
+      >
+      <br />
+      <label>Confirm password</label><br />
+      <input
+        class="form-control"
+        type="password"
+        id="passwordConfirm"
+        placeholder="Confirm your password"
+        ngModel
+        name="passwordConfirm"
+        required
+        #passwordConfirm="ngModel"
+      />
+      <span
+        class="help"
+        [ngClass]="{
+          hidden: passwordConfirm.valid || !passwordConfirm.touched
+        }"
+        >Password must be confirmed</span
+      >
+      <br />
+      <div class="radio" *ngFor="let role of roles">
+        <label>
+          <input
+            type="radio"
+            name="role"
+            ngModel
+            [value]="role"
+            required
+            #role="ngModel"
+          />
+        </label>
+        {{ role | titlecase }}
+        <span class="help" [ngClass]="{ hidden: role.valid || !role.touched }"
+          >You must select a role</span
+        >
+      </div>
+      <br />
+      <div class="buttons-align">
+        <input
+          routerLink="/"
+          class="btn btn-secondary"
+          type="button"
+          value="Back"
+        />
+        <input
+          class="btn btn-success"
+          type="submit"
+          value="Sign Up Now"
+          [disabled]="!signupForm.valid"
+        />
+      </div>
+      <br />
+    </form>
+    <div *ngIf="isLoading" class="spinner">
+      <app-loading-spinner></app-loading-spinner>
+    </div>
+    <div *ngIf="error" class="alert alert-danger">
+      {{ error }}
+    </div>
+    <div *ngIf="success" class="alert alert-success">
+      {{ success }}
+    </div>
+  </div>
+</div>

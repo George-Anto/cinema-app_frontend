@@ -1,0 +1,212 @@
+<app-header></app-header>
+<!-- <div class="position">
+  <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+    <div class="position-sticky">
+      <div class="list-group list-group-flush mx-3 mt-4">
+        <div
+          class="list-group-item py-2 ripple head-navbar-position"
+          aria-current="true"
+        >
+          <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Menu</span>
+        </div>
+        <a
+          *ngIf="isAdmin"
+          routerLink="/main-menu/create-movie"
+          routerLinkActive="active"
+          class="list-group-item list-group-item-action py-2 ripple"
+          ><i class="fas fa-camera-retro fa-fw me-3"></i><span>Create new Movie</span></a
+        >
+        <a
+          routerLink="/main-menu/movie-list"
+          routerLinkActive="active"
+          class="list-group-item list-group-item-action py-2 ripple"
+        >
+          <i class="fas fa-list fa-fw me-3"></i><span>Movies List</span>
+        </a>
+        <a
+          *ngIf="isAdmin"
+          routerLink="/main-menu/create-cinema"
+          routerLinkActive="active"
+          class="list-group-item list-group-item-action py-2 ripple"
+          ><i class="fas fa-film fa-fw me-3"></i
+          ><span>Create new Cinema</span></a
+        >
+        <a
+          routerLink="/main-menu/cinema-list"
+          routerLinkActive="active"
+          class="list-group-item list-group-item-action py-2 ripple"
+          ><i class="fas fa-list fa-fw me-3"></i><span>Cinemas List</span></a
+        >
+        <a
+          *ngIf="isAdmin"
+          routerLink="/main-menu/create-session"
+          routerLinkActive="active"
+          class="list-group-item list-group-item-action py-2 ripple"
+          ><i class="fas fa-calendar fa-fw me-3"></i
+          ><span>Create new Session</span></a
+        >
+        <a
+          routerLink="/main-menu/session-list"
+          routerLinkActive="active"
+          class="list-group-item list-group-item-action py-2 ripple"
+          ><i class="fas fa-list fa-fw me-3"></i
+          ><span>Session List</span></a
+        >
+        <a
+          routerLink="/main-menu/my-invitations"
+          routerLinkActive="active"
+          class="list-group-item list-group-item-action py-2 ripple"
+          ><i class="fas fa-users fa-fw me-3"></i><span>My Bookings</span></a
+        >
+        <a
+          routerLink="/main-menu/calendar"
+          routerLinkActive="active"
+          class="list-group-item list-group-item-action py-2 ripple"
+          ><i class="fas fa-money-bill fa-fw me-3"></i
+          ><span>Booking Calendar</span></a
+        >
+        <a
+          *ngIf="isAdmin"
+          routerLink="/main-menu/create-guest-account"
+          routerLinkActive="active"
+          class="list-group-item list-group-item-action py-2 ripple"
+          ><i class="fas fa-clipboard-check fa-fw me-3"></i
+          ><span>Manage Guest</span></a
+        >
+        <div
+          class="list-group-item py-2 ripple account-navbar-position"
+          aria-current="true"
+        >
+          <i class="fas fa-user fa-fw me-3"></i
+          ><span>Account Settings</span>
+        </div>
+        <a
+          routerLink="/main-menu/update-password"
+          routerLinkActive="active"
+          class="list-group-item list-group-item-action py-2 ripple"
+          aria-current="true"
+        >
+          <i class="fas fa-lock fa-fw me-3"></i
+          ><span>Update Password</span>
+        </a>
+        <a
+          routerLink="/main-menu/update-account"
+          routerLinkActive="active"
+          class="list-group-item list-group-item-action py-2 ripple"
+        >
+          <i class="fas fa-pen fa-fw me-3"></i
+          ><span>Update Account Info</span>
+        </a>
+        <a
+          routerLink="/main-menu/delete-account"
+          routerLinkActive="active"
+          class="list-group-item list-group-item-action py-2 ripple"
+          ><i class="fas fa-trash fa-fw me-3"></i><span>Delete Acount</span></a
+        >
+      </div>
+    </div>
+  </nav>
+  <router-outlet></router-outlet>
+</div> -->
+
+<div class="sidebar">
+  <a
+  *ngIf="isAdmin"
+  routerLink="/main-menu/dashboard"
+  routerLinkActive="active"
+  class="list-group-item list-group-item-action py-2 ripple"
+  ><i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Dashboard</span></a
+  >
+  <a
+    *ngIf="isAdmin"
+    routerLink="/main-menu/create-movie"
+    routerLinkActive="active"
+    class="list-group-item list-group-item-action py-2 ripple"
+    ><i class="fas fa-camera-retro fa-fw me-3"></i><span>Create new Movie</span></a
+  >
+  <a
+    routerLink="/main-menu/movie-list"
+    routerLinkActive="active"
+    class="list-group-item list-group-item-action py-2 ripple"
+  >
+    <i class="fas fa-list fa-fw me-3"></i><span>Movies List</span>
+  </a>
+  <a
+    *ngIf="isAdmin"
+    routerLink="/main-menu/create-cinema"
+    routerLinkActive="active"
+    class="list-group-item list-group-item-action py-2 ripple"
+    ><i class="fas fa-film fa-fw me-3"></i
+    ><span>Create new Cinema</span></a
+  >
+  <a
+    routerLink="/main-menu/cinema-list"
+    routerLinkActive="active"
+    class="list-group-item list-group-item-action py-2 ripple"
+    ><i class="fas fa-list fa-fw me-3"></i><span>Cinemas List</span></a
+  >
+  <a
+    *ngIf="isAdmin"
+    routerLink="/main-menu/create-session"
+    routerLinkActive="active"
+    class="list-group-item list-group-item-action py-2 ripple"
+    ><i class="fas fa-calendar fa-fw me-3"></i
+    ><span>Create new Session</span></a
+  >
+  <a
+    routerLink="/main-menu/session-list"
+    routerLinkActive="active"
+    class="list-group-item list-group-item-action py-2 ripple"
+    ><i class="fas fa-list fa-fw me-3"></i
+    ><span>Session List</span></a
+  >
+  <a
+    routerLink="/main-menu/my-invitations"
+    routerLinkActive="active"
+    class="list-group-item list-group-item-action py-2 ripple"
+    ><i class="fas fa-users fa-fw me-3"></i><span>My Bookings</span></a
+  >
+  <a
+    routerLink="/main-menu/calendar"
+    routerLinkActive="active"
+    class="list-group-item list-group-item-action py-2 ripple"
+    ><i class="fas fa-money-bill fa-fw me-3"></i
+    ><span>Booking Calendar</span></a
+  >
+  <a
+    *ngIf="isAdmin"
+    routerLink="/main-menu/create-guest-account"
+    routerLinkActive="active"
+    class="list-group-item list-group-item-action py-2 ripple"
+    ><i class="fas fa-clipboard-check fa-fw me-3"></i
+    ><span>Manage Guest</span></a
+  >
+  <a
+    routerLink="/main-menu/update-password"
+    routerLinkActive="active"
+    class="list-group-item list-group-item-action py-2 ripple"
+    aria-current="true"
+  >
+    <i class="fas fa-lock fa-fw me-3"></i
+    ><span>Update Password</span>
+  </a>
+  <a
+    routerLink="/main-menu/update-account"
+    routerLinkActive="active"
+    class="list-group-item list-group-item-action py-2 ripple"
+  >
+    <i class="fas fa-pen fa-fw me-3"></i
+    ><span>Update Account Info</span>
+  </a>
+  <a
+    routerLink="/main-menu/delete-account"
+    routerLinkActive="active"
+    class="list-group-item list-group-item-action py-2 ripple"
+    ><i class="fas fa-trash fa-fw me-3"></i><span>Delete Acount</span></a
+  >
+</div>
+
+<div class="screen"><router-outlet></router-outlet></div>
+
+
+

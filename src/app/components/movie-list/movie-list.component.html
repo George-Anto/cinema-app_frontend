@@ -1,0 +1,57 @@
+<div class="screen">
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+  <div class="center"><h1>Movies Available</h1></div>
+  <mat-accordion multi="true" *ngIf="movies.length > 0">
+    <mat-expansion-panel *ngFor="let movie of movies">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <b>{{ movie.title | titlecase }}</b></mat-panel-title
+        >
+      </mat-expansion-panel-header>
+      <mat-list>
+        <mat-list-item> <b>Plot</b> : {{ movie.plot }} </mat-list-item>
+
+        <mat-list-item> <b>Runtime</b> : {{ movie.runtime }} </mat-list-item>
+
+        <mat-list-item>
+          <b>Released Date</b> :
+          {{ movie.released.toString().substring(0, 10) }}
+        </mat-list-item>
+
+        <mat-list-item> <b>Year</b> : {{ movie.year }} </mat-list-item>
+
+        <mat-list-item> <b>Fullplot</b> : {{ movie.fullplot }} </mat-list-item>
+
+        <mat-list-item>
+          <b>Directors</b> : {{ movie.directors }}
+        </mat-list-item>
+
+        <mat-list-item> <b>Cast</b> : {{ movie.cast }} </mat-list-item>
+
+        <mat-list-item>
+          <b>IMDB - rating</b> : {{ movie.imdb.rating }} / <b>votes</b> :
+          {{ movie.imdb.votes }}
+        </mat-list-item>
+
+        <mat-list-item>
+          <b>Tomatoes - rating</b> : {{ movie.tomatoes.rating }} /
+          <b>votes</b> :
+          {{ movie.tomatoes.votes }}
+        </mat-list-item>
+      </mat-list>
+      <mat-action-row *ngIf="isAdmin">
+        <button mat-button color="primary" (click)="onEditMovie(movie)">
+          EDIT
+        </button>
+        <button mat-button color="warn" (click)="onDeleteMovie(movie._id)">
+          DELETE
+        </button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <p *ngIf="movies.length <= 0 && !isLoading">No movies added yet!</p>
+  <div *ngIf="isLoading">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+</div>

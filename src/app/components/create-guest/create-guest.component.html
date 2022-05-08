@@ -1,0 +1,138 @@
+<div class="screen">
+  <h1>Create Guest Account</h1>
+  <div class="center">
+    Here you can create your guest account so you can then check your movie
+    invitations.
+  </div>
+  <h2 class="center">OR</h2>
+  <div class="center">
+    If you already have a Guest Account ckeck your invitations right away.
+  </div>
+  <br />
+  <div class="center">
+    <button class="btn btn-success" routerLink="/main-menu/guest-invitations">
+      Check Invitations
+    </button>
+  </div>
+  <br />
+  <form [formGroup]="createGuestForm" (ngSubmit)="onSubmit()">
+    <label>Firstname</label><br />
+    <input
+      class="form-control"
+      type="text"
+      id="name"
+      placeholder="Your firstname"
+      name="name"
+      formControlName="name"
+    />
+    <span
+      class="help"
+      [ngClass]="{
+        hidden:
+          createGuestForm.get('name').valid ||
+          !createGuestForm.get('name').touched
+      }"
+      >Firstname can not be empty</span
+    >
+    <br />
+    <label>Lastname</label><br />
+    <input
+      class="form-control"
+      type="text"
+      id="surname"
+      placeholder="Your lastname"
+      name="surname"
+      formControlName="surname"
+    />
+    <span
+      class="help"
+      [ngClass]="{
+        hidden:
+          createGuestForm.get('surname').valid ||
+          !createGuestForm.get('surname').touched
+      }"
+      >Lastame can not be empty</span
+    >
+    <br />
+    <label>Email</label><br />
+    <input
+      class="form-control"
+      type="email"
+      id="email"
+      placeholder="Your email"
+      name="email"
+      formControlName="email"
+    />
+    <span
+      class="help"
+      [ngClass]="{
+        hidden:
+          createGuestForm.get('email').valid ||
+          !createGuestForm.get('email').touched
+      }"
+      >Enter a valid Email</span
+    >
+    <br />
+    <label>Mobile phone</label><br />
+    <input
+      class="form-control"
+      type="text"
+      id="phone"
+      placeholder="Your mobile phone"
+      name="mobilePhone"
+      formControlName="mobilePhone"
+    />
+    <span
+      class="help"
+      [ngClass]="{
+        hidden:
+          createGuestForm.get('mobilePhone').valid ||
+          !createGuestForm.get('mobilePhone').touched
+      }"
+      >Mobile phone can not be empty</span
+    >
+    <br />
+    <button type="button" mat-stroked-button (click)="pickFile.click()">
+      Upload a Photo
+    </button>
+    <input
+      type="file"
+      (change)="onPickImage($event)"
+      style="visibility: hidden"
+      #pickFile
+    />
+    <div
+      class="image"
+      *ngIf="imagePreview && createGuestForm.get('image').valid"
+    >
+      <img [src]="imagePreview" [alt]="createGuestForm.value.surname" />
+    </div>
+    <br />
+    <br />
+    <div class="buttons-align">
+      <input
+        routerLink="/main-menu/dashboard"
+        class="btn btn-secondary"
+        type="button"
+        value="Back"
+      />
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <input
+        class="btn btn-success"
+        type="submit"
+        value="Create Guest"
+        [disabled]="!createGuestForm.valid"
+      />
+    </div>
+    <br />
+  </form>
+  <div *ngIf="isLoading" class="spinner">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+  <div *ngIf="error" class="center alert alert-danger">
+    {{ error }}
+  </div>
+  <div *ngIf="success" class="center alert alert-success">
+    {{ success }}
+  </div>
+</div>

@@ -1,0 +1,56 @@
+.screen {
+  display: flex;
+  margin-left: 6rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #444;
+  font-family: 'Poppins', sans-serif;
+  background-color: #eee;
+  margin-top: 100px;
+  position: relative;
+  height: fit-content;
+  width: 70%;
+  padding: 20px !important;
+}
+
+.buttons-align {
+  display: flex;
+  justify-content: space-around;
+}
+
+.center {
+  text-align: center;
+  font-size: 15px;
+}
+
+h1 {
+  font-size: 2rem;
+  text-align: center;
+}
+
+input.ng-invalid.ng-touched {
+  border: 2px solid rgb(223, 59, 64);
+}
+
+.hidden {
+  display: none;
+}
+
+.help {
+  color: rgb(223, 59, 64);
+}
+
+.spinner {
+  text-align: center;
+}
+
+.image {
+  height: 5rem;
+}
+
+.image img {
+  height: 100%;
+  border-style: solid;
+  border-color: #444;
+}

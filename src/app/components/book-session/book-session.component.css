@@ -1,0 +1,177 @@
+/* $seat-available-bg: white;
+$seat-available-color: #a0a0a0;
+$seat-booked-bg: #a0a0a0;
+$seat-booked-color: white;
+$seat-unavailable-bg: black;
+$seat-unavailable-color: white; */
+
+.screen {
+  margin-left: 12rem;
+  width: 35%;
+  margin-top: 100px;
+  position: relative;
+  height: fit-content;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.info {
+  display: flex;
+  justify-content: space-around;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.hidden {
+  display: none;
+}
+
+.message {
+  text-align: center;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.book-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(232, 241, 238);
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  border-style: solid;
+  border-color: #444;
+  border-radius: 1rem;
+}
+
+.email-form {
+  width: 250px;
+}
+
+.badge-primary {
+  color: #fff;
+  background-color: #a0a0a0;
+  padding: 5px;
+  margin: 0px 5px 5px 0px;
+}
+.seatrow {
+  display: inline-flex;
+}
+.pricing-label {
+  font-weight: bold;
+  margin: 0px 0px 16px 16px;
+  padding: 0;
+  text-align: left;
+  color: #a0a0a0;
+  border-bottom: 1px solid #e2e2e2;
+}
+.seat-item {
+  height: 27px;
+  width: 27px;
+  line-height: 25px;
+  margin: 3px;
+  border-radius: 7px;
+  font-size: 14px;
+  padding-left: 5px;
+}
+.seat-space {
+  background-color: white;
+  border: 0;
+  cursor: none;
+}
+.seat-available {
+  color: white;
+  background-color: rgb(97, 202, 71);
+  font-weight: bolder;
+  border: 1px solid #a0a0a0;
+}
+.seat-available:hover {
+  color: #a0a0a0;
+  background-color: white;
+  border: 1px solid #a0a0a0;
+}
+.seat-unavailable {
+  color: white;
+  background-color: rgb(139, 28, 28);
+  font-weight: bolder;
+  border: 1px solid white;
+}
+.seat-booked {
+  color: white;
+  font-weight: bolder;
+  background-color: #a0a0a0;
+  border: 1px solid white;
+}
+.seat-item:hover {
+  cursor: pointer;
+}
+
+.seat-container {
+  overflow-x: auto;
+  padding: 5% 25%;
+  /* overflow-y: hidden; */
+}
+
+.seat-screen {
+  background-color: gray;
+  color: white;
+  padding: 1%;
+  text-align: center;
+  font-weight: bolder;
+}
+.bookingbar {
+  z-index: 1000;
+  bottom: 0;
+  position: fixed;
+  background: white;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  display: inline-flex;
+  width: 102%;
+}
+
+.bookingbar h5 {
+  font-weight: bold;
+}
+
+.bookingbar .book-area {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.bookingbar .book-area button {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.total-amount {
+  background-color: #f17924;
+  color: white;
+  cursor: pointer;
+}
+.row-label {
+  color: black;
+  background-color: white;
+  min-width: 20px;
+  font-weight: bolder;
+  line-height: 32px;
+}
+
+.booking-summary {
+  display: inline-flex;
+}
+.summary-bar {
+  display: inline-flex;
+  margin-top: 1%;
+}
+.no-padding {
+  padding: 0;
+}

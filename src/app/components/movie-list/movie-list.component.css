@@ -1,0 +1,17 @@
+.screen {
+  margin-left: 6rem;
+  width: 70%;
+  margin-top: 100px;
+  position: relative;
+  height: fit-content;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.mat-expansion-panel-header:not([aria-disabled='true']) {
+  cursor: pointer;
+  background-color: #eee;
+}

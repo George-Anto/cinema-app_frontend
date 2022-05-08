@@ -1,0 +1,64 @@
+.login-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  background-color: #444444;
+  align-items: center;
+  color: #444;
+  font-family: 'Poppins', sans-serif;
+}
+
+.form-border {
+  width: 29rem;
+  background-color: #eeeeee;
+  border-style: solid;
+  border-color: #444;
+  border-radius: 1rem;
+  padding: 5rem;
+  padding-bottom: 3rem;
+  padding-top: 3rem;
+  filter: drop-shadow(30px 10px 4px #333333);
+}
+
+.buttons-align {
+  display: flex;
+  justify-content: space-between;
+}
+
+h1 {
+  font-size: 2rem;
+  align-self: center;
+}
+
+input.ng-invalid.ng-touched {
+  border: 2px solid rgb(223, 59, 64);
+}
+
+.hidden {
+  display: none;
+}
+
+.help {
+  color: rgb(223, 59, 64);
+}
+
+.spinner {
+  text-align: center;
+}
+
+.forgot-link {
+  text-align: center;
+  color: #444;
+  font-style: italic;
+  text-decoration: none;
+}
+
+.forgot-link:hover {
+  font-weight: bold;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}

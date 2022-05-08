@@ -1,0 +1,96 @@
+<div class="screen">
+  <h1>Check your Invitations</h1>
+  <div class="center">
+    Here you can check your movie invitations if you already have a Guest
+    Account, if not create one from
+    <a routerLink="/main-menu/create-guest-account" class="link">here</a>.
+  </div>
+  <br />
+  <form (ngSubmit)="onSubmit()" #checkInvitationsForm="ngForm">
+    <label>Email</label><br />
+    <input
+      class="form-control"
+      type="email"
+      id="email"
+      placeholder="Your email"
+      ngModel
+      name="email"
+      required
+      email
+      #email="ngModel"
+    />
+    <span class="help" [ngClass]="{ hidden: email.valid || !email.touched }"
+      >Enter a valid Email</span
+    >
+    <br />
+    <div class="buttons-align">
+      <input
+        routerLink="/main-menu/create-guest-account"
+        class="btn btn-secondary"
+        type="button"
+        value="Back"
+      />
+      <input
+        class="btn btn-success"
+        type="submit"
+        value="Check Invitations"
+        [disabled]="!checkInvitationsForm.valid"
+      />
+    </div>
+    <br />
+  </form>
+</div>
+<div>
+  <div *ngIf="myInvitations.length > 0" class="tickets">
+    <div *ngFor="let myInvitation of myInvitations" class="ticket">
+      <div class="center-item">
+        <h2>Movie Ticket</h2>
+      </div>
+      <b>Guest's Email</b>: {{ myInvitation.email }}
+      <br />
+      <b>Session</b>: {{ myInvitation.session.name | titlecase }}
+      <br />
+      <b>Movie</b>: {{ myInvitation.movie.title | titlecase }}
+      <br />
+      <b>Cinema hall</b>: {{ myInvitation.cinema.name | titlecase }}
+      <br />
+      <b>Date</b>: {{ myInvitation.sessionDate.toString().substring(0, 10) }}
+      <br />
+      <b>Time</b>: {{ myInvitation.sessionTime }}
+      <br />
+      <b>Seat</b>: {{ myInvitation.seat + 1 }}, <b>Row</b>:
+      {{ myInvitation.row + 1 }}
+      <br />
+      <br />
+      <div class="button">
+        <button
+          class="btn btn-secondary"
+          type="button"
+          (click)="onCheckIn(myInvitation)"
+        >
+          Check In
+        </button>
+      </div>
+    </div>
+  </div>
+  <br />
+  <div class="center-item">
+    <div *ngIf="isLoading" class="spinner center-item">
+      <app-loading-spinner></app-loading-spinner>
+    </div>
+    <div *ngIf="error" class="alert alert-danger">
+      {{ error }}
+    </div>
+    <div *ngIf="success" class="alert alert-success">
+      {{ success }}
+    </div>
+  </div>
+  <div
+    *ngIf="!(myInvitations.length > 0) && buttonPressed"
+    class="alert alert-danger center-item width"
+  >
+    <h2 style="text-align: center">
+      You have not booked any movie tickets with your email yet.
+    </h2>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+.screen {
+  margin-left: 6rem;
+  width: 70%;
+  margin-top: 100px;
+  position: relative;
+  height: fit-content;
+}
+
+.copyrights {
+  text-align: center;
+}

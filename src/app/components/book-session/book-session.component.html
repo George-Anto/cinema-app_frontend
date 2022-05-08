@@ -1,0 +1,189 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="screen">
+  <div *ngIf="!noSession">
+    <div style="text-align: center">
+      <h2>{{ currentSession?.name | titlecase }}</h2>
+      <h2>Book your seats here</h2>
+    </div>
+    <div class="info alert alert-info">
+      <div>
+        <b>Movie</b>: {{ currentMovie?.title | titlecase }}
+        <br />
+        <b>Plot</b>: {{ currentMovie?.plot }}
+        <br />
+        <b>Directors</b>: {{ currentMovie?.directors }}
+      </div>
+      <div>
+        <b>Cinema Hall</b>: {{ currentCinema?.name | titlecase }}
+        <br />
+        <b>Date</b>: {{ currentSession?.startDate.toString().substring(0, 10) }}
+        <br />
+        <b>Time</b>: {{ currentSession?.startTime }}
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <div class="center">
+        <img
+          src="../../../assets/images/cinema-screen.png"
+          alt="cinema-screen"
+          width="300"
+          height="200"
+        />
+      </div>
+      <div *ngFor="let seatrow of seatmap">
+        <div
+          class="col-12 pricing-label"
+          *ngIf="
+            seatChartConfig?.showRowWisePricing &&
+            seatrow.seatPricingInformation != ''
+          "
+        >
+          {{ seatrow.seatPricingInformation }}
+        </div>
+
+        <div
+          *ngIf="noCinema"
+          class="alert alert-danger"
+          style="margin-top: 10rem"
+        >
+          <h1>
+            Please select a cinema hall to edit through cinema halls list
+            screen!
+          </h1>
+        </div>
+        <div class="seatrow container">
+          <div *ngIf="seatChartConfig?.showRowsLabel">
+            <div class="row-label">{{ seatrow.seatRowLabel }}</div>
+          </div>
+          <div *ngFor="let seatobj of seatrow.seats">
+            <div
+              class="seat-item seat-space"
+              style="color: white; background-color: white"
+              *ngIf="seatobj.seatLabel == ''"
+            >
+              &nbsp;
+            </div>
+            <div
+              tooltip="Seat : {{ seatobj.seatLabel }} | Price : {{
+                seatobj.price
+              }}Rs"
+              placement="top"
+              [ngClass]="{
+                'seat-item': true,
+                'seat-available': seatobj.status == 'available',
+                'seat-booked': seatobj.status == 'booked',
+                'seat-unavailable': seatobj.status == 'unavailable'
+              }"
+              (click)="selectSeat(seatobj)"
+              *ngIf="
+                (seatobj.status == 'available' || seatobj.status == 'booked') &&
+                seatobj.seatLabel != ''
+              "
+            >
+              {{ seatobj.seatNo }}
+            </div>
+
+            <div
+              tooltip="Seat not available"
+              placement="top"
+              [ngClass]="{ 'seat-item': true, 'seat-unavailable': true }"
+              *ngIf="seatobj.status == 'unavailable' && seatobj.seatLabel != ''"
+            >
+              {{ seatobj.seatNo }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- *ngIf="cart?.selectedSeats?.length > 0" -->
+    <div class="container">
+      <div class="col-lg-12 summary-bar">
+        <div class="col-lg-4">
+          <div class="hidden">
+            <h5>Total Selected : {{ cart?.selectedSeats?.length }}</h5>
+            <h5>Total Amount :&nbsp;&nbsp; {{ cart.totalamount }} Rs</h5>
+          </div>
+        </div>
+        <div class="col-lg-8 selected-seats">
+          <h5 class="col-lg-12 no-padding">Selected Seats :</h5>
+          <span
+            *ngFor="let seatLabel of cart.selectedSeats"
+            class="badge badge-primary"
+            >{{ seatLabel }}</span
+          >
+        </div>
+      </div>
+      <!-- (click)="processBooking()" Book Now Button -->
+      <div class="col-lg-12 book-area buttons">
+        <button
+          routerLink="/main-menu/calendar"
+          type="button"
+          class="btn btn-secondary"
+          mdbWavesEffect
+        >
+          Calendar
+        </button>
+        <button
+          [disabled]="cart?.selectedSeats?.length == 0"
+          type="button"
+          class="btn btn-primary"
+          mdbWavesEffect
+          (click)="onBook()"
+        >
+          Book Now
+        </button>
+      </div>
+      <br />
+    </div>
+  </div>
+  <div *ngIf="bookPressed" class="book-center">
+    <br />
+    <h2>You are about to book {{ totalSeats.length }} seat(s).</h2>
+    <h3>
+      Please provide the personal emails of the peaple attending the movie.
+    </h3>
+    <form (ngSubmit)="onSubmit()" #emailForm="ngForm" class="email-form">
+      <div *ngFor="let seat of totalSeats">
+        <label>Email {{ seat + 1 }}</label
+        ><br />
+        <input
+          class="form-control"
+          type="email"
+          placeholder="Email {{ seat + 1 }}"
+          ngModel
+          name="email{{ seat }}"
+          required
+          email
+          #email{{seat}}="ngModel"
+        />
+        <br />
+      </div>
+      <div class="center">
+        <button
+          type="submit"
+          class="btn btn-success"
+          [disabled]="!emailForm.valid"
+        >
+          Finish Booking
+        </button>
+        <br />
+      </div>
+    </form>
+    <br />
+    <div *ngIf="isLoading" class="spinner">
+      <app-loading-spinner></app-loading-spinner>
+    </div>
+    <div *ngIf="error" class="alert alert-danger message">
+      {{ error }}
+    </div>
+    <div *ngIf="success" class="alert alert-success message">
+      {{ success }}
+    </div>
+  </div>
+  <div *ngIf="noSession" class="alert alert-danger" style="margin-top: 10rem">
+    <h1>
+      Please select a Session to book through Book Session button on Session
+      list screen!
+    </h1>
+  </div>
+</div>

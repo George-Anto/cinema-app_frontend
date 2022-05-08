@@ -1,0 +1,229 @@
+<div class="screen">
+  <div *ngIf="!noMovie">
+    <mat-card>
+      <h1>Edit current Movie</h1>
+      <form (submit)="onEditMovie()" #movieEditForm="ngForm">
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            name="title"
+            placeholder="Title"
+            [ngModel]="currentMovie.title"
+            required
+            #title="ngModel"
+          />
+          <mat-error *ngIf="title.invalid"
+            >Please enter a valid title</mat-error
+          >
+        </mat-form-field>
+        <br />
+
+        <mat-form-field>
+          <input
+            matInput
+            type="number"
+            name="year"
+            placeholder="Year"
+            [ngModel]="currentMovie.year"
+            required
+            #year="ngModel"
+          />
+          <mat-error *ngIf="year.invalid">Please enter a valid year</mat-error>
+        </mat-form-field>
+        <br />
+
+        <mat-form-field>
+          <input
+            matInput
+            type="number"
+            name="runtime"
+            placeholder="Runtime"
+            [ngModel]="currentMovie.runtime"
+            required
+            #runtime="ngModel"
+          />
+          <mat-error *ngIf="runtime.invalid"
+            >Please enter a valid runtime</mat-error
+          >
+        </mat-form-field>
+        <br />
+
+        <mat-form-field>
+          <input
+            matInput
+            type="date"
+            name="released"
+            placeholder="Released Date"
+            [ngModel]="currentMovie.released.toString().substring(0, 10)"
+            required
+            #released="ngModel"
+          />
+          <mat-error *ngIf="released.invalid"
+            >Please enter a valid released date</mat-error
+          >
+        </mat-form-field>
+        <br />
+
+        <mat-form-field>
+          <textarea
+            matInput
+            type="text"
+            name="plot"
+            placeholder="Plot"
+            [ngModel]="currentMovie.plot"
+            required
+            #plot="ngModel"
+          ></textarea>
+          <mat-error *ngIf="plot.invalid">Please enter a valid plot</mat-error>
+        </mat-form-field>
+        <br />
+
+        <mat-form-field>
+          <textarea
+            matInput
+            type="text"
+            name="fullplot"
+            placeholder="Fullplot"
+            [ngModel]="currentMovie.fullplot"
+            required
+            #fullplot="ngModel"
+          ></textarea>
+          <mat-error *ngIf="fullplot.invalid"
+            >Please enter a valid Fullplot</mat-error
+          >
+        </mat-form-field>
+        <br />
+
+        <mat-form-field>
+          <textarea
+            matInput
+            type="text"
+            name="directors"
+            placeholder="Directors"
+            [ngModel]="currentMovie.directors"
+            required
+            #directors="ngModel"
+          ></textarea>
+          <mat-error *ngIf="directors.invalid"
+            >Please enter valid Directors</mat-error
+          >
+        </mat-form-field>
+        <br />
+
+        <mat-form-field>
+          <textarea
+            matInput
+            type="text"
+            name="cast"
+            placeholder="Cast"
+            [ngModel]="currentMovie.cast"
+            required
+            #cast="ngModel"
+          ></textarea>
+          <mat-error *ngIf="cast.invalid">Please enter a valid Cast</mat-error>
+        </mat-form-field>
+        <br />
+
+        <mat-form-field>
+          <input
+            matInput
+            type="number"
+            name="irating"
+            placeholder="IMDB rating"
+            [ngModel]="currentMovie.imdb.rating"
+            required
+            #irating="ngModel"
+          />
+          <mat-error *ngIf="irating.invalid"
+            >Please enter a valid IMDB Rating</mat-error
+          >
+        </mat-form-field>
+        <br />
+
+        <mat-form-field>
+          <input
+            matInput
+            type="number"
+            name="ivotes"
+            placeholder="IMDB votes"
+            [ngModel]="currentMovie.imdb.votes"
+            required
+            #ivotes="ngModel"
+          />
+          <mat-error *ngIf="ivotes.invalid"
+            >Please enter a valid IMDB Votes</mat-error
+          >
+        </mat-form-field>
+        <br />
+
+        <mat-form-field>
+          <input
+            matInput
+            type="number"
+            name="trating"
+            placeholder="Tomatoes rating"
+            [ngModel]="currentMovie.tomatoes.rating"
+            required
+            #trating="ngModel"
+          />
+          <mat-error *ngIf="trating.invalid"
+            >Please enter a valid Tomatoes Rating</mat-error
+          >
+        </mat-form-field>
+        <br />
+
+        <mat-form-field>
+          <input
+            matInput
+            type="number"
+            name="tvotes"
+            placeholder="Tomatoes votes"
+            [ngModel]="currentMovie.tomatoes.votes"
+            required
+            #tvotes="ngModel"
+          />
+          <mat-error *ngIf="tvotes.invalid"
+            >Please enter a valid Tomatoes votes</mat-error
+          >
+        </mat-form-field>
+        <br />
+
+        <div class="buttons">
+          <button
+            mat-raised-button
+            color="basic"
+            type="button"
+            routerLink="/main-menu/movie-list"
+            class="button-back"
+          >
+            Back
+          </button>
+          <button
+            mat-raised-button
+            color="accent"
+            type="submit"
+            [disabled]="!movieEditForm.valid"
+          >
+            Edit Movie
+          </button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+  <div *ngIf="noMovie" class="alert alert-danger" style="margin-top: 10rem">
+    <h1>Please select a move to edit through movie list screen!</h1>
+  </div>
+</div>
+<br />
+<div class="screen">
+  <div *ngIf="isLoading" class="spinner center">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+  <div *ngIf="error" class="alert alert-danger" style="text-align: center">
+    {{ error }}
+  </div>
+  <div *ngIf="success" class="alert alert-success" style="text-align: center">
+    {{ success }}
+  </div>
+</div>

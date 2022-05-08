@@ -1,0 +1,15 @@
+.modal-backdrop {
+  display: none;
+}
+
+.modal {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.screen {
+  margin-left: 6rem;
+  width: 70%;
+  margin-top: 100px;
+  position: relative;
+  height: fit-content;
+}

@@ -1,0 +1,36 @@
+<div class="screen">
+  <h1>Delete Account</h1>
+  <div>
+    By clicking the delete button your account will be deleted permenantly. You
+    will not be able to recover it in the future.
+  </div>
+  <br />
+  <div class="buttons-align">
+    <input
+      class="btn btn-secondary"
+      type="button"
+      value="Back"
+      routerLink="/main-menu/dashboard"
+    />
+    <input
+      class="btn btn-secondary"
+      type="button"
+      value="I understand"
+      (click)="confirmation = true"
+    />
+    <input
+      class="btn btn-danger"
+      type="button"
+      value="Delete"
+      [disabled]="!confirmation"
+      (click)="onDeleteAccount()"
+    />
+  </div>
+  <br />
+  <div *ngIf="isLoading" class="spinner">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+  <div *ngIf="error" class="alert alert-secondary">
+    {{ error }}
+  </div>
+</div>

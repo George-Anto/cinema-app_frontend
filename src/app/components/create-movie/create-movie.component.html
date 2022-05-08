@@ -1,0 +1,221 @@
+<div class="screen">
+  <mat-card>
+    <h1>Create a new Movie</h1>
+    <form (submit)="onCreateMovie()" #movieForm="ngForm">
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          name="title"
+          placeholder="Title"
+          ngModel
+          required
+          #title="ngModel"
+        />
+        <mat-error *ngIf="title.invalid">Please enter a valid title</mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <input
+          matInput
+          type="number"
+          name="year"
+          placeholder="Year"
+          ngModel
+          required
+          #year="ngModel"
+        />
+        <mat-error *ngIf="year.invalid">Please enter a valid year</mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <input
+          matInput
+          type="number"
+          name="runtime"
+          placeholder="Runtime"
+          ngModel
+          required
+          #runtime="ngModel"
+        />
+        <mat-error *ngIf="runtime.invalid"
+          >Please enter a valid runtime</mat-error
+        >
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <input
+          matInput
+          type="date"
+          name="released"
+          placeholder="Released Date"
+          ngModel
+          required
+          #released="ngModel"
+        />
+        <mat-error *ngIf="released.invalid"
+          >Please enter a valid released date</mat-error
+        >
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <textarea
+          matInput
+          type="text"
+          name="plot"
+          placeholder="Plot"
+          ngModel
+          required
+          #plot="ngModel"
+        ></textarea>
+        <mat-error *ngIf="plot.invalid">Please enter a valid plot</mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <textarea
+          matInput
+          type="text"
+          name="fullplot"
+          placeholder="Fullplot"
+          ngModel
+          required
+          #fullplot="ngModel"
+        ></textarea>
+        <mat-error *ngIf="fullplot.invalid"
+          >Please enter a valid Fullplot</mat-error
+        >
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <textarea
+          matInput
+          type="text"
+          name="directors"
+          placeholder="Directors"
+          ngModel
+          required
+          #directors="ngModel"
+        ></textarea>
+        <mat-error *ngIf="directors.invalid"
+          >Please enter valid Directors</mat-error
+        >
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <textarea
+          matInput
+          type="text"
+          name="cast"
+          placeholder="Cast"
+          ngModel
+          required
+          #cast="ngModel"
+        ></textarea>
+        <mat-error *ngIf="cast.invalid">Please enter a valid Cast</mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <input
+          matInput
+          type="number"
+          name="irating"
+          placeholder="IMDB rating"
+          ngModel
+          required
+          #irating="ngModel"
+        />
+        <mat-error *ngIf="irating.invalid"
+          >Please enter a valid IMDB Rating</mat-error
+        >
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <input
+          matInput
+          type="number"
+          name="ivotes"
+          placeholder="IMDB votes"
+          ngModel
+          required
+          #ivotes="ngModel"
+        />
+        <mat-error *ngIf="ivotes.invalid"
+          >Please enter a valid IMDB Votes</mat-error
+        >
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <input
+          matInput
+          type="number"
+          name="trating"
+          placeholder="Tomatoes rating"
+          ngModel
+          required
+          #trating="ngModel"
+        />
+        <mat-error *ngIf="trating.invalid"
+          >Please enter a valid Tomatoes Rating</mat-error
+        >
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <input
+          matInput
+          type="number"
+          name="tvotes"
+          placeholder="Tomatoes votes"
+          ngModel
+          required
+          #tvotes="ngModel"
+        />
+        <mat-error *ngIf="tvotes.invalid"
+          >Please enter a valid Tomatoes votes</mat-error
+        >
+      </mat-form-field>
+      <br />
+
+      <div class="buttons">
+        <button
+          mat-raised-button
+          color="basic"
+          type="button"
+          routerLink="/main-menu/dashboard"
+          class="button-back"
+        >
+          Back
+        </button>
+        <button
+          mat-raised-button
+          color="accent"
+          type="submit"
+          [disabled]="!movieForm.valid"
+        >
+          Create Movie
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>
+<br />
+<div class="screen">
+  <div *ngIf="isLoading" class="spinner center">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+  <div *ngIf="error" class="alert alert-danger" style="text-align: center">
+    {{ error }}
+  </div>
+  <div *ngIf="success" class="alert alert-success" style="text-align: center">
+    {{ success }}
+  </div>
+</div>

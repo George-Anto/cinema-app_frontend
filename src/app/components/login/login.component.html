@@ -1,0 +1,72 @@
+<div class="login-screen">
+  <div class="form-border">
+    <h1>Sign in</h1>
+    <form (ngSubmit)="onSubmit()" #signinForm="ngForm">
+      <label>Username</label><br />
+      <input
+        class="form-control"
+        type="text"
+        id="username"
+        placeholder="Your username"
+        ngModel
+        name="username"
+        required
+        #username="ngModel"
+      />
+      <span
+        class="help"
+        [ngClass]="{ hidden: username.valid || !username.touched }"
+        >Username can not be empty</span
+      >
+      <br />
+      <label>Password</label><br />
+      <input
+        class="form-control"
+        type="password"
+        id="password"
+        placeholder="Your password"
+        ngModel
+        name="password"
+        required
+        #password="ngModel"
+      />
+      <span
+        class="help"
+        [ngClass]="{ hidden: password.valid || !password.touched }"
+        >Password can not be empty</span
+      >
+      <br />
+      <br />
+      <div class="buttons-align">
+        <input
+          class="btn btn-primary"
+          type="submit"
+          value="Sign in"
+          [disabled]="!signinForm.valid"
+        />
+        <input
+          routerLink="/register"
+          class="btn btn-success"
+          type="button"
+          value="Register"
+        />
+      </div>
+      <br />
+      <div style="text-align: center"><b>Or press Register to Sign Up</b></div>
+      <br />
+      <div class="forgot-link">
+        <a class="forgot-link" routerLink="/forgot-password"
+          >Forgot your password?</a
+        >
+      </div>
+      <br />
+    </form>
+    <div *ngIf="isLoading" class="spinner">
+      <app-loading-spinner></app-loading-spinner>
+    </div>
+    <br />
+    <div *ngIf="error" class="alert alert-danger">
+      {{ error }}
+    </div>
+  </div>
+</div>
