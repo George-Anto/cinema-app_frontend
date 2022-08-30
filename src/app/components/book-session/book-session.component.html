@@ -41,16 +41,6 @@
           {{ seatrow.seatPricingInformation }}
         </div>
 
-        <div
-          *ngIf="noCinema"
-          class="alert alert-danger"
-          style="margin-top: 10rem"
-        >
-          <h1>
-            Please select a cinema hall to edit through cinema halls list
-            screen!
-          </h1>
-        </div>
         <div class="seatrow container">
           <div *ngIf="seatChartConfig?.showRowsLabel">
             <div class="row-label">{{ seatrow.seatRowLabel }}</div>

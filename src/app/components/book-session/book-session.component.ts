@@ -49,11 +49,6 @@ export class BookSessionComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initializeSessionData();
 
-    if (!this.currentSession) {
-      this.noSession = true;
-      return;
-    }
-
     //Process a simple bus layout
     this.seatConfig = [
       {
@@ -86,6 +81,12 @@ export class BookSessionComponent implements OnInit, OnDestroy {
 
   initializeSessionData() {
     this.currentSession = JSON.parse(localStorage.getItem('sessionToBookData'));
+
+    if (!this.currentSession) {
+      this.noSession = true;
+      return;
+    }
+
     this.sessionService.getOneCinema(this.currentSession.cinema._id).subscribe(
       (responseData) => {
         this.currentCinema = responseData.data.data;
@@ -238,8 +239,11 @@ export class BookSessionComponent implements OnInit, OnDestroy {
   }
 
   onBook() {
+    this.totalSeats = [];
     const selectedSeats = this.cart.selectedSeats.length;
     const seatstoStore = this.cart.seatstoStore;
+    console.log(this.cart.seatstoStore);
+    console.log(typeof this.cart.seatstoStore);
     let reservedSeatsLayout = Array.from(
       Array(selectedSeats),
       () => new Array(2)

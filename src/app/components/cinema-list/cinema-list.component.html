@@ -9,12 +9,14 @@
         >
       </mat-expansion-panel-header>
       <mat-list>
-        <mat-list-item> <b>photo</b> : {{ cinema.photo }} </mat-list-item>
+        <!-- <mat-list-item> <b>photo</b> : {{ cinema.photo }} </mat-list-item> -->
 
-        <mat-list-item> <b>code</b> : {{ cinema.code }} </mat-list-item>
+        <span *ngIf="isAdmin">
+          <mat-list-item> <b>Code</b> : {{ cinema.code }} </mat-list-item>
+        </span>
 
         <mat-list-item>
-          <b>seatsAvailable</b> : {{ cinema.seatsAvailable }}
+          <b>Seats Available</b> : {{ cinema.seatsAvailable }}
         </mat-list-item>
 
         <mat-list-item>

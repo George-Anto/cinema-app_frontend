@@ -1,5 +1,6 @@
 <div class="screen">
   <div class="row text-center">
+    <h1>{{ viewDate | calendarDate: view + "ViewTitle":"en" }}</h1>
     <div class="col-md-4">
       <div class="btn-group">
         <div
@@ -30,7 +31,7 @@
       </div>
     </div>
     <div class="col-md-4">
-      <h3>{{ viewDate | calendarDate: view + "ViewTitle":"en" }}</h3>
+      <!-- <h3>{{ viewDate | calendarDate: view + "ViewTitle":"en" }}</h3> -->
     </div>
     <div class="col-md-4">
       <div class="btn-group">
@@ -117,7 +118,8 @@
           Cinema name: <b>{{ modalData?.event.cinemaName | titlecase }}</b>
         </h3>
         <h3>
-          Date: <b>{{ modalData?.event.start.toString().substring(0, 10) }}</b>
+          Date:
+          <b>{{ modalData?.event.start.toString().substring(0, 10) }}</b>
         </h3>
         <h3>
           Start Time: <b>{{ modalData?.event.startTime }}</b>
@@ -140,13 +142,13 @@
         BOOK A SEAT!
       </button>
       <!-- <button
-      type="button"
-      class="btn btn-outline-secondary"
-      (click)="close()"
-      [routerLink]="['/sessions/', modalData?.event.id ]"
-    >
-      BOOK A SEAT!
-    </button> -->
+        type="button"
+        class="btn btn-outline-secondary"
+        (click)="close()"
+        [routerLink]="['/sessions/', modalData?.event.id ]"
+        >
+        BOOK A SEAT!
+      </button> -->
     </div>
   </ng-template>
 </div>

@@ -9,9 +9,12 @@
         >
       </mat-expansion-panel-header>
       <mat-list>
-        <mat-list-item> <b>Plot</b> : {{ movie.plot }} </mat-list-item>
+        <mat-list-item> <b>Plot &nbsp;</b> : {{ movie.plot }} </mat-list-item>
 
-        <mat-list-item> <b>Runtime</b> : {{ movie.runtime }} </mat-list-item>
+        <mat-list-item>
+          <b>Runtime</b> : {{ movie.runtime }}
+          <span *ngIf="movie.runtime > 10">&nbsp; minutes</span>
+        </mat-list-item>
 
         <mat-list-item>
           <b>Released Date</b> :
@@ -20,7 +23,9 @@
 
         <mat-list-item> <b>Year</b> : {{ movie.year }} </mat-list-item>
 
-        <mat-list-item> <b>Fullplot</b> : {{ movie.fullplot }} </mat-list-item>
+        <mat-list-item>
+          <b>Fullplot &nbsp;</b> : {{ movie.fullplot }}
+        </mat-list-item>
 
         <mat-list-item>
           <b>Directors</b> : {{ movie.directors }}
@@ -29,12 +34,12 @@
         <mat-list-item> <b>Cast</b> : {{ movie.cast }} </mat-list-item>
 
         <mat-list-item>
-          <b>IMDB - rating</b> : {{ movie.imdb.rating }} / <b>votes</b> :
+          <b>IMDB - rating</b> : {{ movie.imdb.rating }} / &nbsp;<b>votes</b> :
           {{ movie.imdb.votes }}
         </mat-list-item>
 
         <mat-list-item>
-          <b>Tomatoes - rating</b> : {{ movie.tomatoes.rating }} /
+          <b>Tomatoes - rating</b> : {{ movie.tomatoes.rating }} / &nbsp;
           <b>votes</b> :
           {{ movie.tomatoes.votes }}
         </mat-list-item>

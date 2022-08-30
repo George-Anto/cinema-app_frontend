@@ -6,6 +6,9 @@ import {
   Input,
   OnDestroy,
   OnInit,
+  AfterViewInit,
+  AfterViewChecked,
+  OnChanges,
 } from '@angular/core';
 import {
   startOfDay,
@@ -77,7 +80,6 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit() {
     this.loadCalendarSessions();
-    // alert('Warning');
   }
 
   actions: CalendarEventAction[] = [

@@ -9,24 +9,26 @@
         >
       </mat-expansion-panel-header>
       <mat-list>
+        <span *ngIf="isAdmin">
+          <mat-list-item> <b>Code</b> : {{ session.code }} </mat-list-item>
+        </span>
+
         <mat-list-item>
-          <b>movie</b> : {{ session.movie.title | titlecase }}
+          <b>Movie</b> : {{ session.movie.title | titlecase }}
         </mat-list-item>
 
         <mat-list-item>
-          <b>cinema</b> : {{ session.cinema.name | titlecase }}
+          <b>Cinema</b> : {{ session.cinema.name | titlecase }}
         </mat-list-item>
 
         <mat-list-item>
-          <b>startDate</b> :
+          <b>Start Date</b> :
           {{ session.startDate.toString().substring(0, 10) }}
         </mat-list-item>
 
         <mat-list-item>
-          <b>startTime</b> : {{ session.startTime }}
+          <b>Start Time</b> : {{ session.startTime }}
         </mat-list-item>
-
-        <mat-list-item> <b>code</b> : {{ session.code }} </mat-list-item>
       </mat-list>
       <mat-action-row>
         <button mat-button color="primary" (click)="onBookSession(session)">
