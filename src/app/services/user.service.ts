@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs';
-import { User } from '../models/user.model';
+import { FavoriteDays, Genres, User } from '../models/user.model';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -30,7 +30,10 @@ export class UserService {
     username: string,
     email: string,
     mobilePhone: string,
-    image: string | File
+    image: string | File,
+    age: string,
+    favoriteDays: FavoriteDays,
+    genres: Genres
   ) {
     let postData;
 
@@ -42,6 +45,14 @@ export class UserService {
       postData.append('email', email);
       postData.append('mobilePhone', mobilePhone);
       postData.append('photo', image);
+      postData.append('age', age);
+      // postData.append('favoriteDays.monday', favoriteDays.monday);
+      // postData.append('favoriteDays.tuesday', favoriteDays.tuesday);
+      // postData.append('favoriteDays.wednesday', favoriteDays.wednesday);
+      // postData.append('favoriteDays.thursday', favoriteDays.thursday);
+      // postData.append('favoriteDays.friday', favoriteDays.friday);
+      // postData.append('favoriteDays.saturday', favoriteDays.saturday);
+      // postData.append('favoriteDays.sunday', favoriteDays.sunday);
     } else {
       postData = {
         name,
@@ -50,6 +61,9 @@ export class UserService {
         email,
         mobilePhone,
         photo: image,
+        age,
+        favoriteDays,
+        genres,
       };
     }
 
@@ -64,7 +78,13 @@ export class UserService {
           responseData.data.user.username,
           responseData.data.user.email,
           responseData.data.user.mobilePhone,
-          responseData.data.user.photo
+          responseData.data.user.photo,
+          responseData.data.user.age,
+          responseData.data.user.colorBlind,
+          responseData.data.user.favoriteDays,
+          responseData.data.user.genres,
+          responseData.data.user.address,
+          responseData.data.user.hasChildren
         );
 
         this.authService.user.next(user);

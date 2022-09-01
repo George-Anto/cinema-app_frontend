@@ -103,6 +103,12 @@
       >Mobile phone can not be empty</span
     >
     <br />
+    <h2>Personalization Section</h2>
+    <div>
+      Here you can update your profile with info that will help us send you
+      personalized movies and cinemas recommendations.
+    </div>
+    <br />
     <div>Your photo</div>
     <div class="image" *ngIf="imagePreview">
       <img [src]="imagePreview" [alt]="userData.surname" />
@@ -118,6 +124,103 @@
       #pickFile
     />
     <br />
+    <br />
+    <label>Age</label><br />
+    <input
+      class="form-control"
+      type="number"
+      id="age"
+      placeholder="Your age"
+      name="age"
+      formControlName="age"
+    />
+    <br />
+    <div>
+      Here you can choose what days of the week you prefer to go to the movies.
+    </div>
+    <label for="monday">Monday &nbsp;</label>
+    <input type="checkbox" id="monday" name="monday" formControlName="monday" />
+    <label for="tuesday">&nbsp; &nbsp; Tuesday &nbsp;</label>
+    <input
+      type="checkbox"
+      id="tuesday"
+      name="tuesday"
+      formControlName="tuesday"
+    />
+    <label for="wednesday">&nbsp; &nbsp; Wednesday &nbsp;</label>
+    <input
+      type="checkbox"
+      id="wednesday"
+      name="wednesday"
+      formControlName="wednesday"
+    />
+    <label for="thursday">&nbsp; &nbsp; Thursday &nbsp;</label>
+    <input
+      type="checkbox"
+      id="thursday"
+      name="thursday"
+      formControlName="thursday"
+    />
+    <label for="friday">&nbsp; &nbsp; Friday &nbsp;</label>
+    <input type="checkbox" id="friday" name="friday" formControlName="friday" />
+    <label for="saturday">&nbsp; &nbsp; Saturday &nbsp;</label>
+    <input
+      type="checkbox"
+      id="saturday"
+      name="saturday"
+      formControlName="saturday"
+    />
+    <label for="sunday">&nbsp; &nbsp; Sunday &nbsp;</label>
+    <input type="checkbox" id="sunday" name="sunday" formControlName="sunday" />
+    <br />
+    <br />
+    <div>
+      You can also choose your favorite movie genres and receive recommendations
+      accordingly.
+    </div>
+    <label for="action">Action &nbsp;</label>
+    <input type="checkbox" id="action" name="action" formControlName="action" />
+    <label for="comedy">&nbsp; &nbsp; Comedy &nbsp;</label>
+    <input type="checkbox" id="comedy" name="comedy" formControlName="comedy" />
+    <label for="drama">&nbsp; &nbsp; Drama &nbsp;</label>
+    <input type="checkbox" id="drama" name="drama" formControlName="drama" />
+    <label for="fantasy">&nbsp; &nbsp; Fantasy &nbsp;</label>
+    <input
+      type="checkbox"
+      id="fantasy"
+      name="fantasy"
+      formControlName="fantasy"
+    />
+    <label for="horror">&nbsp; &nbsp; Horror &nbsp;</label>
+    <input type="checkbox" id="horror" name="horror" formControlName="horror" />
+    <label for="mystery">&nbsp; &nbsp; Mystery &nbsp;</label>
+    <input
+      type="checkbox"
+      id="mystery"
+      name="mystery"
+      formControlName="mystery"
+    />
+    <label for="romance">&nbsp; &nbsp; Romance &nbsp;</label>
+    <input
+      type="checkbox"
+      id="romance"
+      name="romance"
+      formControlName="romance"
+    />
+    <label for="thriller">&nbsp; &nbsp; Thriller &nbsp;</label>
+    <input
+      type="checkbox"
+      id="thriller"
+      name="thriller"
+      formControlName="thriller"
+    />
+    <label for="western">&nbsp; &nbsp; Western &nbsp;</label>
+    <input
+      type="checkbox"
+      id="western"
+      name="western"
+      formControlName="western"
+    />
     <br />
     <div class="buttons-align">
       <input

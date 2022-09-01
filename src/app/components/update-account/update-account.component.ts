@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { mimeType } from 'src/app/custom-validators/mime-type.validator';
-import { User } from 'src/app/models/user.model';
+import { FavoriteDays, Genres, User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -48,6 +48,32 @@ export class UpdateAccountComponent implements OnInit {
 
     this.isLoading = true;
 
+    console.log(this.updateAccountForm.value);
+
+    const favoriteDays: FavoriteDays = {
+      monday: this.updateAccountForm.value.monday,
+      tuesday: this.updateAccountForm.value.tuesday,
+      wednesday: this.updateAccountForm.value.wednesday,
+      thursday: this.updateAccountForm.value.thursday,
+      friday: this.updateAccountForm.value.friday,
+      saturday: this.updateAccountForm.value.saturday,
+      sunday: this.updateAccountForm.value.sunday,
+    };
+
+    const genres: Genres = {
+      Action: this.updateAccountForm.value.action,
+      Comedy: this.updateAccountForm.value.comedy,
+      Drama: this.updateAccountForm.value.drama,
+      Fantasy: this.updateAccountForm.value.fantasy,
+      Horror: this.updateAccountForm.value.horror,
+      Mystery: this.updateAccountForm.value.mystery,
+      Romance: this.updateAccountForm.value.romance,
+      Thriller: this.updateAccountForm.value.thriller,
+      Western: this.updateAccountForm.value.western,
+    };
+
+    console.log(genres);
+
     this.userService
       .updateAccount(
         this.updateAccountForm.value.name,
@@ -55,7 +81,10 @@ export class UpdateAccountComponent implements OnInit {
         this.updateAccountForm.value.username,
         this.updateAccountForm.value.email,
         this.updateAccountForm.value.mobilePhone,
-        this.updateAccountForm.value.image
+        this.updateAccountForm.value.image,
+        this.updateAccountForm.value.age,
+        favoriteDays,
+        genres
       )
       .subscribe(
         () => {
@@ -93,6 +122,23 @@ export class UpdateAccountComponent implements OnInit {
         { value: null, disabled: true },
         { validators: [Validators.required] }
       ),
+      age: new FormControl(null),
+      monday: new FormControl(null),
+      tuesday: new FormControl(null),
+      wednesday: new FormControl(null),
+      thursday: new FormControl(null),
+      friday: new FormControl(null),
+      saturday: new FormControl(null),
+      sunday: new FormControl(null),
+      action: new FormControl(null),
+      comedy: new FormControl(null),
+      drama: new FormControl(null),
+      fantasy: new FormControl(null),
+      horror: new FormControl(null),
+      mystery: new FormControl(null),
+      romance: new FormControl(null),
+      thriller: new FormControl(null),
+      western: new FormControl(null),
       image: new FormControl(null, {
         validators: [Validators.required],
         asyncValidators: [mimeType],
@@ -110,8 +156,28 @@ export class UpdateAccountComponent implements OnInit {
           email: user.email,
           mobilePhone: user.mobilePhone,
           image: `${this.imgUrl}${user.photo}`,
+          age: user.age || null,
+          monday: user.favoriteDays.monday,
+          tuesday: user.favoriteDays.tuesday,
+          wednesday: user.favoriteDays.wednesday,
+          thursday: user.favoriteDays.thursday,
+          friday: user.favoriteDays.friday,
+          saturday: user.favoriteDays.saturday,
+          sunday: user.favoriteDays.sunday,
+          action: user.genres.Action,
+          comedy: user.genres.Comedy,
+          drama: user.genres.Drama,
+          fantasy: user.genres.Fantasy,
+          horror: user.genres.Horror,
+          mystery: user.genres.Mystery,
+          romance: user.genres.Romance,
+          thriller: user.genres.Thriller,
+          western: user.genres.Western,
         });
 
+        this.userData.id = user.id;
+        this.userData.role = user.role;
+        this.userData.jsonToken = user.jsonToken;
         this.userData.name = user.name;
         this.userData.surname = user.surname;
         this.userData.username = user.username;
@@ -119,6 +185,23 @@ export class UpdateAccountComponent implements OnInit {
         this.userData.mobilePhone = user.mobilePhone;
         this.userData.photo = `${this.imgUrl}${user.photo}`;
         this.imagePreview = `${this.imgUrl}${user.photo}`;
+        this.userData.age = user.age;
+        this.userData.isColorBlind = user.isColorBlind;
+        this.userData.favoriteDays = user.favoriteDays;
+        this.userData.genres = user.genres;
+        this.userData.address = user.address;
+        this.userData.hasChildren = user.hasChildren;
+        this.userData.genres.Action = user.genres.Action;
+        this.userData.genres.Comedy = user.genres.Comedy;
+        this.userData.genres.Drama = user.genres.Drama;
+        this.userData.genres.Fantasy = user.genres.Fantasy;
+        this.userData.genres.Horror = user.genres.Horror;
+        this.userData.genres.Mystery = user.genres.Mystery;
+        this.userData.genres.Romance = user.genres.Romance;
+        this.userData.genres.Thriller = user.genres.Thriller;
+        this.userData.genres.Western = user.genres.Western;
+
+        console.log(this.userData);
       })
       .unsubscribe();
   }
@@ -137,6 +220,12 @@ export class UpdateAccountComponent implements OnInit {
       )
     ) {
       this.error = 'Not a valid image file! Please upload only jpg images.';
+    } else if (
+      errorResponse.error.message.includes(
+        'Validation failed: age: Path `age` (-1) is less than minimum allowed value (0).'
+      )
+    ) {
+      this.error = 'Not a valid age.';
     } else {
       this.error = errorResponse.error.message;
     }

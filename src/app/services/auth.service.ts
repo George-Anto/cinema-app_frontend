@@ -53,14 +53,20 @@ export class AuthService {
             responseData.data.user.username,
             responseData.data.user.email,
             responseData.data.user.mobilePhone,
-            responseData.data.user.photo
+            responseData.data.user.photo,
+            responseData.data.user.age,
+            responseData.data.user.colorBlind,
+            responseData.data.user.favoriteDays,
+            responseData.data.user.genres,
+            responseData.data.user.address,
+            responseData.data.user.hasChildren
           );
 
           this.jsonToken = responseData.token;
 
           this.user.next(user);
           localStorage.setItem('userData', JSON.stringify(user));
-          console.log(this.user);
+          // console.log(this.user);
         })
       );
   }
@@ -79,7 +85,13 @@ export class AuthService {
       userData.username,
       userData.email,
       userData.mobilePhone,
-      userData.photo
+      userData.photo,
+      userData.age,
+      userData.isColorBlind,
+      userData.favoriteDays,
+      userData.genres,
+      userData.address,
+      userData.hasChildren
     );
 
     this.user.next(loadedUser);
