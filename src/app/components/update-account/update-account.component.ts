@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
 import { mimeType } from 'src/app/custom-validators/mime-type.validator';
-import { FavoriteDays, Genres, User } from 'src/app/models/user.model';
+import { Address, FavoriteDays, Genres, User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -72,7 +71,14 @@ export class UpdateAccountComponent implements OnInit {
       Western: this.updateAccountForm.value.western,
     };
 
-    console.log(genres);
+    const address: Address = {
+      street: this.updateAccountForm.value.street,
+      number: this.updateAccountForm.value.streetNumber,
+      district: this.updateAccountForm.value.district,
+      city: this.updateAccountForm.value.city,
+      latitude: this.updateAccountForm.value.latitude,
+      longitude: this.updateAccountForm.value.longitude,
+    };
 
     this.userService
       .updateAccount(
@@ -84,7 +90,10 @@ export class UpdateAccountComponent implements OnInit {
         this.updateAccountForm.value.image,
         this.updateAccountForm.value.age,
         favoriteDays,
-        genres
+        genres,
+        address,
+        this.updateAccountForm.value.children,
+        this.updateAccountForm.value.colorBlind
       )
       .subscribe(
         () => {
@@ -139,6 +148,14 @@ export class UpdateAccountComponent implements OnInit {
       romance: new FormControl(null),
       thriller: new FormControl(null),
       western: new FormControl(null),
+      street: new FormControl(null),
+      streetNumber: new FormControl(null),
+      district: new FormControl(null),
+      city: new FormControl(null),
+      latitude: new FormControl(null),
+      longitude: new FormControl(null),
+      children: new FormControl(null),
+      colorBlind: new FormControl(null),
       image: new FormControl(null, {
         validators: [Validators.required],
         asyncValidators: [mimeType],
@@ -173,6 +190,14 @@ export class UpdateAccountComponent implements OnInit {
           romance: user.genres.Romance,
           thriller: user.genres.Thriller,
           western: user.genres.Western,
+          street: user.address?.street,
+          streetNumber: user.address?.number,
+          district: user.address?.district,
+          city: user.address?.city,
+          latitude: user.address?.latitude,
+          longitude: user.address?.longitude,
+          children: user.hasChildren,
+          colorBlind: user.isColorBlind,
         });
 
         this.userData.id = user.id;
@@ -191,15 +216,6 @@ export class UpdateAccountComponent implements OnInit {
         this.userData.genres = user.genres;
         this.userData.address = user.address;
         this.userData.hasChildren = user.hasChildren;
-        this.userData.genres.Action = user.genres.Action;
-        this.userData.genres.Comedy = user.genres.Comedy;
-        this.userData.genres.Drama = user.genres.Drama;
-        this.userData.genres.Fantasy = user.genres.Fantasy;
-        this.userData.genres.Horror = user.genres.Horror;
-        this.userData.genres.Mystery = user.genres.Mystery;
-        this.userData.genres.Romance = user.genres.Romance;
-        this.userData.genres.Thriller = user.genres.Thriller;
-        this.userData.genres.Western = user.genres.Western;
 
         console.log(this.userData);
       })

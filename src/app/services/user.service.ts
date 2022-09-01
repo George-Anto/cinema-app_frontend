@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs';
-import { FavoriteDays, Genres, User } from '../models/user.model';
+import { Address, FavoriteDays, Genres, User } from '../models/user.model';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -33,7 +33,10 @@ export class UserService {
     image: string | File,
     age: string,
     favoriteDays: FavoriteDays,
-    genres: Genres
+    genres: Genres,
+    address: Address,
+    hasChildren: boolean,
+    colorBlind: boolean
   ) {
     let postData;
 
@@ -64,6 +67,9 @@ export class UserService {
         age,
         favoriteDays,
         genres,
+        address,
+        hasChildren,
+        colorBlind,
       };
     }
 

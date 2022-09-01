@@ -7,6 +7,19 @@
   <div class="center">Your username and mobile phone can NOT be updated.</div>
   <br />
   <form [formGroup]="updateAccountForm" (ngSubmit)="onSubmit()">
+    <div class="center-div">
+      <span style="font-size: 18px">
+        Check this box to adjust the colors if you have trouble viewing our
+        site. &nbsp;
+      </span>
+      <input
+        type="checkbox"
+        id="colorBlind"
+        name="colorBlind"
+        formControlName="colorBlind"
+      />
+    </div>
+    <br />
     <label>Firstname</label><br />
     <input
       class="form-control"
@@ -103,12 +116,12 @@
       >Mobile phone can not be empty</span
     >
     <br />
-    <h2>Personalization Section</h2>
-    <div>
-      Here you can update your profile with info that will help us send you
-      personalized movies and cinemas recommendations.
-    </div>
     <br />
+    <h2>Personalization Section</h2>
+    <h3>
+      Here you can update your profile with information that will help us send
+      you personalized movies and cinemas recommendations.
+    </h3>
     <div>Your photo</div>
     <div class="image" *ngIf="imagePreview">
       <img [src]="imagePreview" [alt]="userData.surname" />
@@ -135,9 +148,11 @@
       formControlName="age"
     />
     <br />
-    <div>
+    <br />
+    <h3>
       Here you can choose what days of the week you prefer to go to the movies.
-    </div>
+      That way we can show you what movies are available on those days!
+    </h3>
     <label for="monday">Monday &nbsp;</label>
     <input type="checkbox" id="monday" name="monday" formControlName="monday" />
     <label for="tuesday">&nbsp; &nbsp; Tuesday &nbsp;</label>
@@ -174,10 +189,10 @@
     <input type="checkbox" id="sunday" name="sunday" formControlName="sunday" />
     <br />
     <br />
-    <div>
+    <h3>
       You can also choose your favorite movie genres and receive recommendations
-      accordingly.
-    </div>
+      accordingly!
+    </h3>
     <label for="action">Action &nbsp;</label>
     <input type="checkbox" id="action" name="action" formControlName="action" />
     <label for="comedy">&nbsp; &nbsp; Comedy &nbsp;</label>
@@ -220,6 +235,83 @@
       id="western"
       name="western"
       formControlName="western"
+    />
+    <br />
+    <br />
+    <h3 class="inline">
+      Do you have any underaged children? We can show recommendations for them
+      also! &nbsp;
+    </h3>
+    <input
+      type="checkbox"
+      id="children"
+      name="children"
+      formControlName="children"
+    />
+    <br />
+    <br />
+    <br />
+    <h3>
+      You can also add your address here. That way we can point out the cinema
+      halls that are close to you!
+    </h3>
+    <label>Street</label><br />
+    <input
+      class="form-control"
+      type="text"
+      id="street"
+      placeholder="Your street name"
+      name="street"
+      formControlName="street"
+    />
+    <br />
+    <label>Number</label><br />
+    <input
+      class="form-control"
+      type="number"
+      id="streetNumber"
+      placeholder="Your street number"
+      name="streetNumber"
+      formControlName="streetNumber"
+    />
+    <br />
+    <label>District</label><br />
+    <input
+      class="form-control"
+      type="text"
+      id="district"
+      placeholder="Your district"
+      name="district"
+      formControlName="district"
+    />
+    <br /><label>City</label><br />
+    <input
+      class="form-control"
+      type="text"
+      id="city"
+      placeholder="Your city name"
+      name="city"
+      formControlName="city"
+    />
+    <br />
+    <label>Latitude</label><br />
+    <input
+      class="form-control"
+      type="number"
+      id="latitude"
+      placeholder="Your latitude"
+      name="latitude"
+      formControlName="latitude"
+    />
+    <br />
+    <label>Longitude</label><br />
+    <input
+      class="form-control"
+      type="number"
+      id="longitude"
+      placeholder="Your longitude"
+      name="longitude"
+      formControlName="longitude"
     />
     <br />
     <div class="buttons-align">
