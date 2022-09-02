@@ -1,11 +1,53 @@
 <div class="screen">
-  <h1>Update Account Information</h1>
+  <h1>Update Account Information & Personalization</h1>
   <div class="center">
     Here you can update some or all of your accounts's informations. You can
     take these actions as many times as you want.
   </div>
   <div class="center">Your username and mobile phone can NOT be updated.</div>
   <br />
+  <form [formGroup]="updateImageForm" (ngSubmit)="onSubmitImage()">
+    <div class="center-div">
+      <div>Your Profile Photo</div>
+    </div>
+    <div class="center-div">
+      <div class="image" *ngIf="imagePreview">
+        <img [src]="imagePreview" [alt]="userData.surname" />
+      </div>
+    </div>
+    <input
+      type="file"
+      (change)="onPickImage($event)"
+      style="visibility: hidden"
+      #pickFile
+    />
+    <br />
+    <button type="button" mat-stroked-button (click)="pickFile.click()">
+      Choose a new Photo
+    </button>
+    &nbsp; &nbsp; &nbsp;
+    <button
+      mat-raised-button
+      value="Upload Photo"
+      type="submit"
+      [disabled]="!updateImageForm.valid"
+      Upload
+      Photo
+    >
+      Upload Photo
+    </button>
+  </form>
+  <br />
+  <br />
+  <div *ngIf="isLoading" class="spinner">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+  <div *ngIf="errorImage" class="center alert alert-danger">
+    {{ errorImage }}
+  </div>
+  <div *ngIf="successImage" class="center alert alert-success">
+    {{ successImage }}
+  </div>
   <form [formGroup]="updateAccountForm" (ngSubmit)="onSubmit()">
     <div class="center-div">
       <span style="font-size: 18px">
@@ -122,22 +164,6 @@
       Here you can update your profile with information that will help us send
       you personalized movies and cinemas recommendations.
     </h3>
-    <div>Your photo</div>
-    <div class="image" *ngIf="imagePreview">
-      <img [src]="imagePreview" [alt]="userData.surname" />
-    </div>
-    <br />
-    <button type="button" mat-stroked-button (click)="pickFile.click()">
-      Upload new Photo
-    </button>
-    <input
-      type="file"
-      (change)="onPickImage($event)"
-      style="visibility: hidden"
-      #pickFile
-    />
-    <br />
-    <br />
     <label>Age</label><br />
     <input
       class="form-control"

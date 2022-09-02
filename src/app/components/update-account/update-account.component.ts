@@ -12,9 +12,12 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UpdateAccountComponent implements OnInit {
   updateAccountForm: FormGroup;
+  updateImageForm: FormGroup;
   isLoading: boolean = false;
   error: string = null;
   success: string = null;
+  errorImage: string = null;
+  successImage: string = null;
   userData = new User(null, null, null, null, null, null, null, null);
   imgUrl: string = 'http://localhost:3000/img/users/';
   imagePreview: string;
@@ -25,21 +28,49 @@ export class UpdateAccountComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.createForm();
-    this.preFillForm();
+    this.createForms();
+    this.preFillForms();
   }
 
   onPickImage(event: Event) {
     const imageFile = (event.target as HTMLInputElement).files[0];
-    this.updateAccountForm.patchValue({ image: imageFile });
-    this.updateAccountForm.get('image').updateValueAndValidity;
+    this.updateImageForm.patchValue({ image: imageFile });
+    this.updateImageForm.get('image').updateValueAndValidity;
     const fileReader = new FileReader();
     fileReader.onload = () => {
-      if (this.updateAccountForm.get('image').valid) {
+      if (this.updateImageForm.get('image').valid) {
         this.imagePreview = fileReader.result as string;
       }
     };
     fileReader.readAsDataURL(imageFile);
+  }
+
+  onSubmitImage() {
+    if (!this.updateImageForm.valid) return;
+
+    this.isLoading = true;
+
+    this.userService
+      .updateAccountImage(this.updateImageForm.value.image)
+      .subscribe(
+        () => {
+          this.isLoading = false;
+          this.errorImage = null;
+          this.successImage =
+            "You have successfully updated your account's photo!";
+        },
+        (errorResponse) => {
+          this.isLoading = false;
+          if (errorResponse?.error?.message) {
+            this.showErrorMessageImage(errorResponse);
+            console.log(errorResponse.error.message);
+          } else {
+            this.errorImage = errorResponse.message;
+          }
+          this.successImage = null;
+          console.log(errorResponse);
+        }
+      );
   }
 
   onSubmit() {
@@ -87,7 +118,6 @@ export class UpdateAccountComponent implements OnInit {
         this.updateAccountForm.value.username,
         this.updateAccountForm.value.email,
         this.updateAccountForm.value.mobilePhone,
-        this.updateAccountForm.value.image,
         this.updateAccountForm.value.age,
         favoriteDays,
         genres,
@@ -116,7 +146,7 @@ export class UpdateAccountComponent implements OnInit {
       );
   }
 
-  createForm() {
+  createForms() {
     this.updateAccountForm = new FormGroup({
       name: new FormControl(null, { validators: [Validators.required] }),
       surname: new FormControl(null, { validators: [Validators.required] }),
@@ -156,6 +186,9 @@ export class UpdateAccountComponent implements OnInit {
       longitude: new FormControl(null),
       children: new FormControl(null),
       colorBlind: new FormControl(null),
+    });
+
+    this.updateImageForm = new FormGroup({
       image: new FormControl(null, {
         validators: [Validators.required],
         asyncValidators: [mimeType],
@@ -163,7 +196,7 @@ export class UpdateAccountComponent implements OnInit {
     });
   }
 
-  preFillForm() {
+  preFillForms() {
     this.authService.user
       .subscribe((user) => {
         this.updateAccountForm.patchValue({
@@ -172,7 +205,6 @@ export class UpdateAccountComponent implements OnInit {
           username: user.username,
           email: user.email,
           mobilePhone: user.mobilePhone,
-          image: `${this.imgUrl}${user.photo}`,
           age: user.age || null,
           monday: user.favoriteDays.monday,
           tuesday: user.favoriteDays.tuesday,
@@ -199,6 +231,12 @@ export class UpdateAccountComponent implements OnInit {
           children: user.hasChildren,
           colorBlind: user.isColorBlind,
         });
+
+        this.updateImageForm.patchValue({
+          image: `${this.imgUrl}${user.photo}`,
+        });
+
+        console.log(`${this.imgUrl}${user.photo}`);
 
         this.userData.id = user.id;
         this.userData.role = user.role;
@@ -232,18 +270,25 @@ export class UpdateAccountComponent implements OnInit {
         'There is another user with that mobile phone already or the mobile phone you provided is not valid.';
     } else if (
       errorResponse.error.message.includes(
-        'Not a valid image file! Please upload only jpg images.'
-      )
-    ) {
-      this.error = 'Not a valid image file! Please upload only jpg images.';
-    } else if (
-      errorResponse.error.message.includes(
         'Validation failed: age: Path `age` (-1) is less than minimum allowed value (0).'
       )
     ) {
       this.error = 'Not a valid age.';
     } else {
       this.error = errorResponse.error.message;
+    }
+  }
+
+  private showErrorMessageImage(errorResponse) {
+    if (
+      errorResponse.error.message.includes(
+        'Not a valid image file! Please upload only jpg images.'
+      )
+    ) {
+      this.errorImage =
+        'Not a valid image file! Please upload only jpg images.';
+    } else {
+      this.errorImage = 'Upload failed, please try again later.';
     }
   }
 }
