@@ -236,8 +236,6 @@ export class UpdateAccountComponent implements OnInit {
           image: `${this.imgUrl}${user.photo}`,
         });
 
-        console.log(`${this.imgUrl}${user.photo}`);
-
         this.userData.id = user.id;
         this.userData.role = user.role;
         this.userData.jsonToken = user.jsonToken;
@@ -254,6 +252,7 @@ export class UpdateAccountComponent implements OnInit {
         this.userData.genres = user.genres;
         this.userData.address = user.address;
         this.userData.hasChildren = user.hasChildren;
+        this.userData.friends = user.friends;
 
         console.log(this.userData);
       })

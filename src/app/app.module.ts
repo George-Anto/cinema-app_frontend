@@ -51,6 +51,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { CreateGuestComponent } from './components/create-guest/create-guest.component';
 import { GuestInvitationsComponent } from './components/guest-invitations/guest-invitations.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { FriendsListComponent } from './components/friends-list/friends-list.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     CreateGuestComponent,
     GuestInvitationsComponent,
     DashboardComponent,
+    FriendsListComponent,
   ],
   imports: [
     BrowserModule,

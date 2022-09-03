@@ -1,0 +1,53 @@
+.screen {
+  display: flex;
+  margin-left: 6rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #444;
+  font-family: "Poppins", sans-serif;
+  background-color: #eee;
+  margin-top: 100px;
+  position: relative;
+  height: fit-content;
+  width: 70%;
+  padding: 20px !important;
+}
+
+.center {
+  text-align: center;
+  font-size: 15px;
+}
+
+input.ng-invalid.ng-touched {
+  border: 2px solid rgb(223, 59, 64);
+}
+
+.hidden {
+  display: none;
+}
+
+.help {
+  color: rgb(223, 59, 64);
+}
+
+.spinner {
+  text-align: center;
+}
+
+.buttons-align {
+  display: flex;
+  justify-content: space-between;
+}
+
+.width {
+  width: 100%;
+}
+
+.friends {
+  border-style: solid;
+  border-color: #444;
+  border-width: 5px;
+  padding: 10px;
+  background-color: aliceblue;
+}

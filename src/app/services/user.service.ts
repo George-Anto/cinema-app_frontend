@@ -75,6 +75,21 @@ export class UserService {
     );
   }
 
+  updateAccountFriends(friends: string[]) {
+    return this.http
+      .patch<any>(`${this.url}/users/updateMe`, {
+        friends,
+      })
+      .pipe(
+        tap((responseData) => {
+          const user = this.getCurrentUser(responseData);
+
+          this.authService.user.next(user);
+          localStorage.setItem('userData', JSON.stringify(user));
+        })
+      );
+  }
+
   private getCurrentUser(responseData): User {
     return new User(
       this.authService.jsonToken,
@@ -91,8 +106,17 @@ export class UserService {
       responseData.data.user.favoriteDays,
       responseData.data.user.genres,
       responseData.data.user.address,
-      responseData.data.user.hasChildren
+      responseData.data.user.hasChildren,
+      responseData.data.user.friends
     );
+  }
+
+  getUserById(userId: string) {
+    return this.http.get<any>(`${this.url}/users/${userId}`);
+  }
+
+  getUserByEmail(userEmail: string) {
+    return this.http.get<any>(`${this.url}/users/userByEmail/${userEmail}`);
   }
 
   deleteAccount() {

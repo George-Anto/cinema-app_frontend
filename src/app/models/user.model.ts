@@ -14,7 +14,8 @@ export class User {
     public favoriteDays?: FavoriteDays,
     public genres?: Genres,
     public address?: Address,
-    public hasChildren?: boolean
+    public hasChildren?: boolean,
+    public friends?: string[]
   ) {}
 }
 

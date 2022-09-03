@@ -59,7 +59,8 @@ export class AuthService {
             responseData.data.user.favoriteDays,
             responseData.data.user.genres,
             responseData.data.user.address,
-            responseData.data.user.hasChildren
+            responseData.data.user.hasChildren,
+            responseData.data.user.friends
           );
 
           this.jsonToken = responseData.token;
@@ -91,7 +92,8 @@ export class AuthService {
       userData.favoriteDays,
       userData.genres,
       userData.address,
-      userData.hasChildren
+      userData.hasChildren,
+      userData.friends
     );
 
     this.user.next(loadedUser);

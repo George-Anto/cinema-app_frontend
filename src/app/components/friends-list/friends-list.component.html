@@ -1,0 +1,73 @@
+<div class="screen">
+  <h1>Connect with your Friends!</h1>
+  <div class="center">
+    Here you can search your friends accounts by their email and connect with
+    them.
+  </div>
+  <br />
+  <div class="center">
+    That way you can receive recommendations using their likes and preferences
+    too.
+  </div>
+  <br />
+  <br />
+  <h2 *ngIf="friends.length === 0">You have not added any friends yet.</h2>
+  <div *ngIf="friends.length > 0" class="friends">
+    <div style="font-size: 20px">Your Friends List</div>
+    <br />
+    <div style="font-size: 16px" *ngFor="let friend of friends">
+      <b>{{ friend.name }} {{ friend.surname }} </b> | {{ friend.email }}
+    </div>
+  </div>
+  <br />
+  <br />
+  <form [formGroup]="findFriendsForm" (ngSubmit)="onSubmit()" class="width">
+    <div style="font-size: 18px">
+      Search and add a friend by their account's email.
+    </div>
+    <br />
+    <label>Friend's Email</label>
+    <input
+      class="form-control"
+      type="email"
+      id="email"
+      placeholder="Your friend's account email"
+      name="email"
+      formControlName="email"
+    />
+    <span
+      class="help"
+      [ngClass]="{
+        hidden:
+          findFriendsForm.get('email').valid ||
+          !findFriendsForm.get('email').touched
+      }"
+      >Email can not be empty</span
+    >
+    <br />
+    <div class="buttons-align">
+      <input
+        routerLink="/main-menu/dashboard"
+        class="btn btn-secondary"
+        type="button"
+        value="Back"
+      />
+      <input
+        class="btn btn-success"
+        type="submit"
+        value="Add Friend"
+        [disabled]="!findFriendsForm.valid"
+      />
+    </div>
+  </form>
+  <br />
+  <div *ngIf="isLoading" class="spinner">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+  <div *ngIf="error" class="center alert alert-danger">
+    {{ error }}
+  </div>
+  <div *ngIf="success" class="center alert alert-success">
+    {{ success }}
+  </div>
+</div>
