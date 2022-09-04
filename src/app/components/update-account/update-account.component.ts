@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { mimeType } from 'src/app/custom-validators/mime-type.validator';
 import { Address, FavoriteDays, Genres, User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
@@ -11,8 +11,8 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./update-account.component.css'],
 })
 export class UpdateAccountComponent implements OnInit {
-  updateAccountForm: FormGroup;
-  updateImageForm: FormGroup;
+  updateAccountForm: UntypedFormGroup;
+  updateImageForm: UntypedFormGroup;
   isLoading: boolean = false;
   error: string = null;
   success: string = null;
@@ -147,49 +147,49 @@ export class UpdateAccountComponent implements OnInit {
   }
 
   createForms() {
-    this.updateAccountForm = new FormGroup({
-      name: new FormControl(null, { validators: [Validators.required] }),
-      surname: new FormControl(null, { validators: [Validators.required] }),
-      username: new FormControl(
+    this.updateAccountForm = new UntypedFormGroup({
+      name: new UntypedFormControl(null, { validators: [Validators.required] }),
+      surname: new UntypedFormControl(null, { validators: [Validators.required] }),
+      username: new UntypedFormControl(
         { value: null, disabled: true },
         { validators: [Validators.required] }
       ),
-      email: new FormControl(null, {
+      email: new UntypedFormControl(null, {
         validators: [Validators.required, Validators.email],
       }),
-      mobilePhone: new FormControl(
+      mobilePhone: new UntypedFormControl(
         { value: null, disabled: true },
         { validators: [Validators.required] }
       ),
-      age: new FormControl(null),
-      monday: new FormControl(null),
-      tuesday: new FormControl(null),
-      wednesday: new FormControl(null),
-      thursday: new FormControl(null),
-      friday: new FormControl(null),
-      saturday: new FormControl(null),
-      sunday: new FormControl(null),
-      action: new FormControl(null),
-      comedy: new FormControl(null),
-      drama: new FormControl(null),
-      fantasy: new FormControl(null),
-      horror: new FormControl(null),
-      mystery: new FormControl(null),
-      romance: new FormControl(null),
-      thriller: new FormControl(null),
-      western: new FormControl(null),
-      street: new FormControl(null),
-      streetNumber: new FormControl(null),
-      district: new FormControl(null),
-      city: new FormControl(null),
-      latitude: new FormControl(null),
-      longitude: new FormControl(null),
-      children: new FormControl(null),
-      colorBlind: new FormControl(null),
+      age: new UntypedFormControl(null),
+      monday: new UntypedFormControl(null),
+      tuesday: new UntypedFormControl(null),
+      wednesday: new UntypedFormControl(null),
+      thursday: new UntypedFormControl(null),
+      friday: new UntypedFormControl(null),
+      saturday: new UntypedFormControl(null),
+      sunday: new UntypedFormControl(null),
+      action: new UntypedFormControl(null),
+      comedy: new UntypedFormControl(null),
+      drama: new UntypedFormControl(null),
+      fantasy: new UntypedFormControl(null),
+      horror: new UntypedFormControl(null),
+      mystery: new UntypedFormControl(null),
+      romance: new UntypedFormControl(null),
+      thriller: new UntypedFormControl(null),
+      western: new UntypedFormControl(null),
+      street: new UntypedFormControl(null),
+      streetNumber: new UntypedFormControl(null),
+      district: new UntypedFormControl(null),
+      city: new UntypedFormControl(null),
+      latitude: new UntypedFormControl(null),
+      longitude: new UntypedFormControl(null),
+      children: new UntypedFormControl(null),
+      colorBlind: new UntypedFormControl(null),
     });
 
-    this.updateImageForm = new FormGroup({
-      image: new FormControl(null, {
+    this.updateImageForm = new UntypedFormGroup({
+      image: new UntypedFormControl(null, {
         validators: [Validators.required],
         asyncValidators: [mimeType],
       }),

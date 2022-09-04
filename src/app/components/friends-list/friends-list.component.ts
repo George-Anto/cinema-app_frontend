@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./friends-list.component.css'],
 })
 export class FriendsListComponent implements OnInit {
-  findFriendsForm: FormGroup;
+  findFriendsForm: UntypedFormGroup;
   isLoading: boolean = false;
   error: string = null;
   success: string = null;
@@ -28,8 +28,8 @@ export class FriendsListComponent implements OnInit {
   }
 
   private createForm(): void {
-    this.findFriendsForm = new FormGroup({
-      email: new FormControl(null, { validators: [Validators.required] }),
+    this.findFriendsForm = new UntypedFormGroup({
+      email: new UntypedFormControl(null, { validators: [Validators.required] }),
     });
   }
 

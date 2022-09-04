@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { GuestService } from 'src/app/services/guest.service';
 import { mimeType } from 'src/app/custom-validators/mime-type.validator';
 
@@ -9,7 +9,7 @@ import { mimeType } from 'src/app/custom-validators/mime-type.validator';
   styleUrls: ['./create-guest.component.css'],
 })
 export class CreateGuestComponent implements OnInit {
-  createGuestForm: FormGroup;
+  createGuestForm: UntypedFormGroup;
   isLoading: boolean = false;
   success: string = null;
   error: string = null;
@@ -18,14 +18,14 @@ export class CreateGuestComponent implements OnInit {
   constructor(private guestService: GuestService) {}
 
   ngOnInit(): void {
-    this.createGuestForm = new FormGroup({
-      name: new FormControl(null, { validators: [Validators.required] }),
-      surname: new FormControl(null, { validators: [Validators.required] }),
-      email: new FormControl(null, {
+    this.createGuestForm = new UntypedFormGroup({
+      name: new UntypedFormControl(null, { validators: [Validators.required] }),
+      surname: new UntypedFormControl(null, { validators: [Validators.required] }),
+      email: new UntypedFormControl(null, {
         validators: [Validators.required, Validators.email],
       }),
-      mobilePhone: new FormControl(null, { validators: [Validators.required] }),
-      image: new FormControl(null, {
+      mobilePhone: new UntypedFormControl(null, { validators: [Validators.required] }),
+      image: new UntypedFormControl(null, {
         validators: [Validators.required],
         asyncValidators: [mimeType],
       }),
