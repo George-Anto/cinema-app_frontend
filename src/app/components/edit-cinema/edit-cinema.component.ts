@@ -44,6 +44,8 @@ export class EditCinemaComponent implements OnInit, OnDestroy {
         this.cinemaEditForm.value.code,
         this.cinemaEditForm.value.startDate,
         this.cinemaEditForm.value.endDate,
+        this.cinemaEditForm.value.longitude,
+        this.cinemaEditForm.value.latitude,
         this.cinemaEditForm.value.active
       )
       .subscribe(
@@ -62,6 +64,10 @@ export class EditCinemaComponent implements OnInit, OnDestroy {
             seatsAvailable: this.currentCinema.seatsAvailable,
             startDate: this.cinemaEditForm.value.startDate,
             endDate: this.cinemaEditForm.value.endDate,
+            location: {
+              longitude: this.cinemaEditForm.value.longitude,
+              latitude: this.cinemaEditForm.value.latitude,
+            },
             active: this.cinemaEditForm.value.active,
           };
 

@@ -34,6 +34,8 @@ export class CreateCinemaComponent implements OnInit {
         // this.cinemaForm.value.seatsAvailable,
         this.cinemaForm.value.startDate,
         this.cinemaForm.value.endDate,
+        this.cinemaForm.value.longitude,
+        this.cinemaForm.value.latitude,
         this.cinemaForm.value.status
       )
       .subscribe(

@@ -6,6 +6,15 @@
   height: fit-content;
 }
 
+.screen-message {
+  margin-left: 6rem;
+  width: 70%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  position: relative;
+  height: fit-content;
+}
+
 .buttons {
   display: flex;
   justify-content: space-between;
@@ -26,5 +35,3 @@
   text-align: left;
   width: 100%;
 }
-
-

@@ -189,6 +189,90 @@
         </mat-form-field>
         <br />
 
+        <br />
+        <h4><b>Select Matching Rating:</b></h4>
+        <mat-form-field appearance="fill">
+          <mat-label>Choose Rating</mat-label>
+          <mat-select name="rating" [(ngModel)]="currentMovie.rating" required>
+            <mat-option value="Unrated">Unrated</mat-option>
+            <mat-option value="G">G</mat-option>
+            <mat-option value="PG">PG</mat-option>
+            <mat-option value="PG13">PG13</mat-option>
+            <mat-option value="R">R</mat-option>
+            <mat-option value="NC-17">NC-17</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- checkboxes -->
+
+        <br />
+        <mat-slide-toggle
+          ngModel
+          name="familyMovie"
+          [(ngModel)]="currentMovie.familyMovie"
+          >Family Movie</mat-slide-toggle
+        >
+        <!-- <mat-checkbox name="familyMovie" [(ngModel)]="currentMovie.familyMovie"
+          >familyMovie</mat-checkbox> -->
+
+        <br />
+        <mat-slide-toggle
+          ngModel
+          name="cultStatus"
+          [(ngModel)]="currentMovie.cultStatus"
+          >Cult Movie</mat-slide-toggle
+        >
+        <!-- <mat-checkbox name="cultStatus" [(ngModel)]="currentMovie.cultStatus"
+          >cultStatus</mat-checkbox> -->
+
+        <br /><br />
+        <h4><b>Select Matching Genres:</b></h4>
+        <mat-checkbox name="Action" [(ngModel)]="currentMovie.genres.Action"
+          >Action</mat-checkbox
+        >
+
+        &nbsp;&nbsp;
+        <mat-checkbox name="Comedy" [(ngModel)]="currentMovie.genres.Comedy"
+          >Comedy</mat-checkbox
+        >
+
+        &nbsp;&nbsp;
+        <mat-checkbox name="Drama" [(ngModel)]="currentMovie.genres.Drama"
+          >Drama</mat-checkbox
+        >
+
+        &nbsp;&nbsp;
+        <mat-checkbox name="Fantasy" [(ngModel)]="currentMovie.genres.Fantasy"
+          >Fantasy</mat-checkbox
+        >
+
+        &nbsp;&nbsp;
+        <mat-checkbox name="Horror" [(ngModel)]="currentMovie.genres.Horror"
+          >Horror</mat-checkbox
+        >
+
+        &nbsp;&nbsp;
+        <mat-checkbox name="Mystery" [(ngModel)]="currentMovie.genres.Mystery"
+          >Mystery</mat-checkbox
+        >
+
+        &nbsp;&nbsp;
+        <mat-checkbox name="Romance" [(ngModel)]="currentMovie.genres.Romance"
+          >Romance</mat-checkbox
+        >
+
+        &nbsp;&nbsp;
+        <mat-checkbox name="Thriller" [(ngModel)]="currentMovie.genres.Thriller"
+          >Thriller</mat-checkbox
+        >
+
+        &nbsp;&nbsp;
+        <mat-checkbox name="Western" [(ngModel)]="currentMovie.genres.Western"
+          >Western</mat-checkbox
+        ><br /><br />
+
+        <!-- end checkboxes -->
+
         <div class="buttons">
           <button
             mat-raised-button
@@ -215,8 +299,7 @@
     <h1>Please select a move to edit through movie list screen!</h1>
   </div>
 </div>
-<br />
-<div class="screen">
+<div class="screen-message">
   <div *ngIf="isLoading" class="spinner center">
     <app-loading-spinner></app-loading-spinner>
   </div>

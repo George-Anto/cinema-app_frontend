@@ -8,5 +8,6 @@ export type Cinema = {
   seatsAvailable: number;
   startDate: Date;
   endDate: Date;
+  location: { longitude: number; latitude: number };
   active: boolean;
 };

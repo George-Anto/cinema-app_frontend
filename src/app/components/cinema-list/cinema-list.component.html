@@ -27,6 +27,17 @@
           <b>End Date</b> : {{ cinema.endDate.toString().substring(0, 10) }}
         </mat-list-item>
 
+        <mat-list-item>
+          <b>Location</b> : {{ cinema.location.longitude }} ,
+          {{ cinema.location.latitude }}</mat-list-item
+        >
+
+        <!-- google-maps -->
+          <google-map width="600px" height="400px" [center]="{lat: cinema.location.longitude, lng: cinema.location.latitude}">
+             <map-marker [position]="{lat: cinema.location.longitude, lng: cinema.location.latitude}" [label]="cinema.name" ></map-marker>
+             <map-info-window>Info Window content</map-info-window>
+          </google-map>
+
         <mat-list-item> <b>Active</b> : {{ cinema.active }} </mat-list-item>
       </mat-list>
       <mat-action-row *ngIf="isAdmin">
@@ -45,3 +56,4 @@
     <app-loading-spinner></app-loading-spinner>
   </div>
 </div>
+

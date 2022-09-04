@@ -12,11 +12,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 // import { MatIconModule } from '@angular/material/icon';
+
+import { GoogleMapsModule } from '@angular/google-maps';
 
 //---------------------------------------------
 import { MatListModule } from '@angular/material/list';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { CommonModule } from '@angular/common';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
@@ -101,6 +105,9 @@ import { FriendsListComponent } from './components/friends-list/friends-list.com
     MatGridListModule,
     CommonModule,
     NgbModalModule,
+    GoogleMapsModule,
+    MatSlideToggleModule,
+    MatCheckboxModule,
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,

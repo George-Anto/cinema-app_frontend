@@ -111,6 +111,35 @@
         </mat-error>
       </mat-form-field>
       <br />
+
+      <mat-form-field>
+        <input
+          matInput
+          type="number"
+          name="longitude"
+          placeholder="longitude"
+          ngModel
+          required
+          #code="ngModel"
+        />
+        <mat-error *ngIf="code.invalid">Please enter a valid longitude quordinates.</mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <input
+          matInput
+          type="number"
+          name="latitude"
+          placeholder="latitude"
+          ngModel
+          required
+          #code="ngModel"
+        />
+        <mat-error *ngIf="code.invalid">Please enter a valid latitude quordinates.</mat-error>
+      </mat-form-field>
+      <br />
+
       <div>Active:</div>
       <div class="radio" *ngFor="let status of statuses">
         <label>
@@ -125,6 +154,7 @@
         </label>
         {{ status }}
       </div>
+      
       <br />
       <div class="buttons">
         <button

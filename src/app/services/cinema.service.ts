@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +16,8 @@ export class CinemaService {
     //seatsLayout: number,
     startDate: Date,
     endDate: Date,
+    longitude: number,
+    latitude: number,
     active: boolean
   ) {
     return this.http.post<any>(`${this.url}/cinemas`, {
@@ -33,6 +34,10 @@ export class CinemaService {
       seatsAvailable: 80,
       startDate: startDate,
       endDate: endDate,
+      location: {
+        longitude: longitude,
+        latitude: latitude,
+      },
       active: active,
     });
   }
@@ -53,6 +58,8 @@ export class CinemaService {
     //seatsLayout: number,
     startDate: Date,
     endDate: Date,
+    longitude: number,
+    latitude: number,
     active: boolean
   ) {
     return this.http.patch(`${this.url}/cinemas/${id}`, {
@@ -60,6 +67,10 @@ export class CinemaService {
       code: code,
       startDate: startDate,
       endDate: endDate,
+      location: {
+        longitude: longitude,
+        latitude: latitude,
+      },
       active: active,
     });
   }

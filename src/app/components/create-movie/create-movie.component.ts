@@ -1,11 +1,19 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { MAT_CHECKBOX_DEFAULT_OPTIONS } from '@angular/material/checkbox';
+import { Genres } from 'src/app/models/user.model';
 import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
   selector: 'app-create-movie',
   templateUrl: './create-movie.component.html',
   styleUrls: ['./create-movie.component.css'],
+  providers: [
+    {
+      provide: MAT_CHECKBOX_DEFAULT_OPTIONS,
+      useValue: { clickAction: 'check-indeterminate' },
+    },
+  ],
 })
 export class CreateMovieComponent implements OnInit {
   @ViewChild('movieForm') movieForm: NgForm;
@@ -25,6 +33,18 @@ export class CreateMovieComponent implements OnInit {
 
     this.isLoading = true;
 
+    const genres: Genres = {
+      Action: !!this.movieForm.value.Action,
+      Comedy: !!this.movieForm.value.Comedy,
+      Drama: !!this.movieForm.value.Drama,
+      Fantasy: !!this.movieForm.value.Fantasy,
+      Horror: !!this.movieForm.value.Horror,
+      Mystery: !!this.movieForm.value.Mystery,
+      Romance: !!this.movieForm.value.Romance,
+      Thriller: !!this.movieForm.value.Thriller,
+      Western: !!this.movieForm.value.Western,
+    };
+
     this.movieService
       .createMovie(
         this.movieForm.value.title,
@@ -38,7 +58,11 @@ export class CreateMovieComponent implements OnInit {
         this.movieForm.value.irating,
         this.movieForm.value.ivotes,
         this.movieForm.value.trating,
-        this.movieForm.value.tvotes
+        this.movieForm.value.tvotes,
+        this.movieForm.value.rating,
+        genres,
+        !!this.movieForm.value.familyMovie,
+        !!this.movieForm.value.cultStatus
       )
       .subscribe(
         (responseData) => {

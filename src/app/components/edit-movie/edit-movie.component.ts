@@ -1,12 +1,20 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { MAT_CHECKBOX_DEFAULT_OPTIONS } from '@angular/material/checkbox';
 import { Movie } from 'src/app/models/movie.model';
+import { Genres } from 'src/app/models/user.model';
 import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
   selector: 'app-adit-movie',
   templateUrl: './edit-movie.component.html',
   styleUrls: ['./edit-movie.component.css'],
+  providers: [
+    {
+      provide: MAT_CHECKBOX_DEFAULT_OPTIONS,
+      useValue: { clickAction: 'check-indeterminate' },
+    },
+  ],
 })
 export class EditMovieComponent implements OnInit, OnDestroy {
   currentMovie: Movie;
@@ -20,6 +28,8 @@ export class EditMovieComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.currentMovie = JSON.parse(localStorage.getItem('movieToEditData'));
+
+    console.log(localStorage.getItem('movieToEditData'));
 
     if (!this.currentMovie) {
       this.noMovie = true;
@@ -35,6 +45,18 @@ export class EditMovieComponent implements OnInit, OnDestroy {
 
     this.isLoading = true;
 
+    const genres: Genres = {
+      Action: !!this.movieEditForm.value.Action,
+      Comedy: !!this.movieEditForm.value.Comedy,
+      Drama: !!this.movieEditForm.value.Drama,
+      Fantasy: !!this.movieEditForm.value.Fantasy,
+      Horror: !!this.movieEditForm.value.Horror,
+      Mystery: !!this.movieEditForm.value.Mystery,
+      Romance: !!this.movieEditForm.value.Romance,
+      Thriller: !!this.movieEditForm.value.Thriller,
+      Western: !!this.movieEditForm.value.Western,
+    };
+
     this.movieService
       .editMovie(
         this.currentMovie._id,
@@ -49,7 +71,11 @@ export class EditMovieComponent implements OnInit, OnDestroy {
         this.movieEditForm.value.irating,
         this.movieEditForm.value.ivotes,
         this.movieEditForm.value.trating,
-        this.movieEditForm.value.tvotes
+        this.movieEditForm.value.tvotes,
+        this.movieEditForm.value.rating,
+        genres,
+        !!this.movieEditForm.value.familyMovie,
+        !!this.movieEditForm.value.cultStatus
       )
       .subscribe(
         (responseData) => {
@@ -77,6 +103,10 @@ export class EditMovieComponent implements OnInit, OnDestroy {
               votes: this.movieEditForm.value.tvotes,
             },
             posters: 'www.somephoto.com',
+            rating: this.movieEditForm.value.rating,
+            genres: genres,
+            familyMovie: !!this.movieEditForm.value.familyMovie,
+            cultStatus: !!this.movieEditForm.value.cultStatus,
           };
 
           localStorage.setItem('movieToEditData', JSON.stringify(movie));

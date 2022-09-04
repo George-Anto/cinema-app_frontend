@@ -43,6 +43,30 @@
           <b>votes</b> :
           {{ movie.tomatoes.votes }}
         </mat-list-item>
+
+        <mat-list-item>
+          <b>Movie Rating</b> : {{ movie.rating }}
+        </mat-list-item>
+
+        <mat-list-item *ngIf="movie.familyMovie">
+          <b>Family Movie</b>
+        </mat-list-item>
+        <mat-list-item *ngIf="movie.cultStatus">
+          <b>Cult Movie</b>
+        </mat-list-item>
+
+        <mat-list-item>
+          <span><b>Genre: </b> &nbsp;</span>
+          <div *ngIf="movie.genres.Action">Action &nbsp;</div>
+          <div *ngIf="movie.genres.Comedy">Comedy &nbsp;</div>
+          <div *ngIf="movie.genres.Drama">Drama &nbsp;</div>
+          <div *ngIf="movie.genres.Fantasy">Fantasy &nbsp;</div>
+          <div *ngIf="movie.genres.Horror">Horror &nbsp;</div>
+          <div *ngIf="movie.genres.Mustery">Mustery &nbsp;</div>
+          <div *ngIf="movie.genres.Romance">Romance &nbsp;</div>
+          <div *ngIf="movie.genres.Thriller">Thriller &nbsp;</div>
+          <div *ngIf="movie.genres.Western">Western &nbsp;</div>
+        </mat-list-item>
       </mat-list>
       <mat-action-row *ngIf="isAdmin">
         <button mat-button color="primary" (click)="onEditMovie(movie)">

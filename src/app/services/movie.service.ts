@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Genres } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -24,15 +25,19 @@ export class MovieService {
     irating: number,
     ivotes: number,
     trating: number,
-    tvotes: number
+    tvotes: number,
+    rating: string,
+    genres: Genres,
+    familyMovie: boolean,
+    cultStatus: boolean
   ) {
     return this.http.post<any>(`${this.url}/movies`, {
-      title: title,
-      year: year,
-      runtime: runtime,
-      released: released,
-      plot: plot,
-      fullplot: fullplot,
+      title,
+      year,
+      runtime,
+      released,
+      plot,
+      fullplot,
       directors: directors.split(','),
       cast: cast.split(','),
       imdb: {
@@ -44,6 +49,10 @@ export class MovieService {
         votes: tvotes,
       },
       poster: 'www.somephoto.com',
+      rating,
+      genres,
+      familyMovie,
+      cultStatus,
     });
   }
 
@@ -68,17 +77,21 @@ export class MovieService {
     irating: number,
     ivotes: number,
     trating: number,
-    tvotes: number
+    tvotes: number,
+    rating: string,
+    genres: Genres,
+    familyMovie: boolean,
+    cultStatus: boolean
   ) {
     return this.http.patch<any>(`${this.url}/movies/${id}`, {
-      title: title,
-      year: year,
-      runtime: runtime,
-      released: released,
-      plot: plot,
-      fullplot: fullplot,
-      directors: directors,
-      cast: cast,
+      title,
+      year,
+      runtime,
+      released,
+      plot,
+      fullplot,
+      directors: directors.split(','),
+      cast: cast.split(','),
       imdb: {
         rating: irating,
         votes: ivotes,
@@ -88,6 +101,10 @@ export class MovieService {
         votes: tvotes,
       },
       poster: 'www.somephoto.com',
+      rating,
+      genres,
+      familyMovie,
+      cultStatus,
     });
   }
 
