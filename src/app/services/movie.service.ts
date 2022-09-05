@@ -90,8 +90,10 @@ export class MovieService {
       released,
       plot,
       fullplot,
-      directors: directors.split(','),
-      cast: cast.split(','),
+      // directors: directors.split(','),
+      // cast: cast.split(','),
+      directors,
+      cast,
       imdb: {
         rating: irating,
         votes: ivotes,
