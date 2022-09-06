@@ -116,7 +116,7 @@ export class UserService {
   }
 
   getUserByEmail(userEmail: string) {
-    return this.http.get<any>(`${this.url}/users/userByEmail/${userEmail}`);
+    return this.http.get<any>(`${this.url}/users/${userEmail}`);
   }
 
   deleteAccount() {

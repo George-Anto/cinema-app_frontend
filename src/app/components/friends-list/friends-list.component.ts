@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
@@ -10,7 +16,8 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./friends-list.component.css'],
 })
 export class FriendsListComponent implements OnInit {
-  findFriendsForm: UntypedFormGroup;
+  // findFriendsForm: UntypedFormGroup;
+  findFriendsForm: FormGroup;
   isLoading: boolean = false;
   error: string = null;
   success: string = null;
@@ -28,8 +35,10 @@ export class FriendsListComponent implements OnInit {
   }
 
   private createForm(): void {
-    this.findFriendsForm = new UntypedFormGroup({
-      email: new UntypedFormControl(null, { validators: [Validators.required] }),
+    this.findFriendsForm = new FormGroup({
+      email: new FormControl(null, {
+        validators: [Validators.required],
+      }),
     });
   }
 
@@ -58,9 +67,20 @@ export class FriendsListComponent implements OnInit {
 
     this.userService.getUserByEmail(this.findFriendsForm.value.email).subscribe(
       (aUserData) => {
-        const theUser: User = aUserData.data.data;
+        const theUser = aUserData.data.data;
+
+        console.log(theUser);
+        console.log(this.userData.friends);
+
+        if (this.userData.friends.includes(theUser._id)) {
+          this.isLoading = false;
+          this.success = null;
+          this.error = 'You hava already that person in your friends list!';
+          return;
+        }
+
         this.friends.push(theUser);
-        this.userData.friends.push(theUser.id);
+        this.userData.friends.push(theUser._id);
 
         this.userService.updateAccountFriends(this.userData.friends).subscribe(
           () => {
@@ -85,16 +105,22 @@ export class FriendsListComponent implements OnInit {
       },
       (errorResponse) => {
         this.isLoading = false;
-        if (errorResponse?.error?.message) {
-          // this.showErrorMessage(errorResponse);
-          this.error = errorResponse.error.message;
-          console.log(errorResponse.error.message);
-        } else {
-          this.error = errorResponse.message;
-        }
-        this.success = null;
-        console.log(errorResponse);
+        this.showErrorMessage(errorResponse);
       }
     );
+  }
+
+  private showErrorMessage(errorResponse) {
+    if (
+      errorResponse?.error?.message.includes(
+        'No document found with that ID or that Email'
+      )
+    ) {
+      this.error = 'No user with that email was found.';
+      console.log(errorResponse);
+    } else {
+      this.error = 'An error occured, please try again later.';
+      console.log(errorResponse);
+    }
   }
 }
