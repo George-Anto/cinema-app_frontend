@@ -76,9 +76,7 @@ export class FavoriteDaysAndGenresComponent implements OnInit {
     //Not important for now
     if (errorResponse.error?.message?.includes('enddate')) {
       this.error = 'The end date must be greater than the start date.';
-    } else if (errorResponse.error?.message?.includes('code')) {
-      this.error = 'You must enter a unique code.';
-    } else {
+    } else if (errorResponse?.message.includes('Unknown Error')) {
       this.error = 'An error occured, please try again later.';
     }
   }
