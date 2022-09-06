@@ -25,6 +25,7 @@ import { CreateGuestComponent } from './components/create-guest/create-guest.com
 import { GuestInvitationsComponent } from './components/guest-invitations/guest-invitations.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FriendsListComponent } from './components/friends-list/friends-list.component';
+import { FavoriteDaysAndGenresComponent } from './components/personalization/favorite-days-and-genres/favorite-days-and-genres.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -114,6 +115,10 @@ const routes: Routes = [
         canActivate: [AdminGuard],
       },
       { path: 'friends-list', component: FriendsListComponent },
+      {
+        path: 'favorite-days-genres',
+        component: FavoriteDaysAndGenresComponent,
+      },
     ],
   },
 ];

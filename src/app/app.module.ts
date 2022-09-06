@@ -56,6 +56,7 @@ import { CreateGuestComponent } from './components/create-guest/create-guest.com
 import { GuestInvitationsComponent } from './components/guest-invitations/guest-invitations.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FriendsListComponent } from './components/friends-list/friends-list.component';
+import { FavoriteDaysAndGenresComponent } from './components/personalization/favorite-days-and-genres/favorite-days-and-genres.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { FriendsListComponent } from './components/friends-list/friends-list.com
     GuestInvitationsComponent,
     DashboardComponent,
     FriendsListComponent,
+    FavoriteDaysAndGenresComponent,
   ],
   imports: [
     BrowserModule,

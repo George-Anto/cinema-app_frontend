@@ -33,10 +33,23 @@
         >
 
         <!-- google-maps -->
-          <google-map width="600px" height="400px" [center]="{lat: cinema.location.longitude, lng: cinema.location.latitude}">
-             <map-marker [position]="{lat: cinema.location.longitude, lng: cinema.location.latitude}" [label]="cinema.name" ></map-marker>
-             <map-info-window>Info Window content</map-info-window>
-          </google-map>
+        <google-map
+          width="600px"
+          height="400px"
+          [center]="{
+            lat: cinema.location.longitude,
+            lng: cinema.location.latitude
+          }"
+        >
+          <map-marker
+            [position]="{
+              lat: cinema.location.longitude,
+              lng: cinema.location.latitude
+            }"
+            [label]="cinema.name"
+          ></map-marker>
+          <map-info-window>Info Window content</map-info-window>
+        </google-map>
 
         <mat-list-item> <b>Active</b> : {{ cinema.active }} </mat-list-item>
       </mat-list>
@@ -56,4 +69,3 @@
     <app-loading-spinner></app-loading-spinner>
   </div>
 </div>
-

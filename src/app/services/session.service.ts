@@ -42,6 +42,26 @@ export class SessionService {
     return this.http.get<any>(`${this.url}/sessions/${sessionId}`);
   }
 
+  getSessionsOfFavoriteDaysAndGernes() {
+    return this.http.get<any>(`${this.url}/sessions/favorite-days-and-genres`);
+  }
+
+  getSessionsOfFavoriteDaysAndGernesCult() {
+    return this.http.get<any>(
+      `${this.url}/sessions/favorite-days-and-genres-and-cult-movies`
+    );
+  }
+
+  getSessionsOfFavoriteDaysAndGernesFamily() {
+    return this.http.get<any>(
+      `${this.url}/sessions/favorite-days-and-genres-family`
+    );
+  }
+
+  getSessionsOfFavoriteDays() {
+    return this.http.get<any>(`${this.url}/sessions/favorite-days`);
+  }
+
   editSession(
     id: string,
     code: number,

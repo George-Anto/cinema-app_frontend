@@ -1,0 +1,58 @@
+<div class="screen">
+  <div class="center"><h1>Filtered Movies - Gernes - Days</h1></div>
+  <div class="center">
+    <h2>
+      Movies that match your favorite Gentres and that are available the days of
+      the week that you prefer!
+    </h2>
+  </div>
+  <mat-accordion multi="true" *ngIf="mySessions.length > 0">
+    <mat-expansion-panel *ngFor="let session of mySessions">
+      <mat-expansion-panel-header>
+        <mat-panel-title
+          ><b>{{ session.name }}</b></mat-panel-title
+        >
+      </mat-expansion-panel-header>
+      <mat-list>
+        <span *ngIf="isAdmin">
+          <mat-list-item> <b>Code</b> : {{ session.code }} </mat-list-item>
+        </span>
+
+        <mat-list-item>
+          <b>Movie</b> : {{ session.movie_doc[0].title | titlecase }}
+        </mat-list-item>
+
+        <mat-list-item>
+          <b>Cinema</b> : {{ session.cinema_doc[0].name | titlecase }}
+        </mat-list-item>
+
+        <mat-list-item>
+          <b>Date</b> :
+          {{ session.startDate.toString().substring(0, 10) }}
+        </mat-list-item>
+
+        <mat-list-item> <b>Time</b> : {{ session.startTime }} </mat-list-item>
+      </mat-list>
+      <mat-action-row>
+        <button mat-button color="primary" (click)="onBookSession(session)">
+          BOOK TICKETS
+        </button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <p
+    class="center alert alert-danger"
+    *ngIf="mySessions.length <= 0 && !isLoading"
+  >
+    Please add your favorite movie gernes and the days you prefer to go to the
+    cinema so we will give you our suggestions! You can do that
+    <a routerLink="/main-menu/update-account">here</a>.
+  </p>
+  <div *ngIf="error" class="center alert alert-danger">
+    {{ error }}
+  </div>
+  <div *ngIf="isLoading">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+</div>
