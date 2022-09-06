@@ -26,6 +26,7 @@ import { GuestInvitationsComponent } from './components/guest-invitations/guest-
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FriendsListComponent } from './components/friends-list/friends-list.component';
 import { FavoriteDaysAndGenresComponent } from './components/personalization/favorite-days-and-genres/favorite-days-and-genres.component';
+import { FavoriteDaysComponent } from './components/personalization/favorite-days/favorite-days.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -118,6 +119,10 @@ const routes: Routes = [
       {
         path: 'favorite-days-genres',
         component: FavoriteDaysAndGenresComponent,
+      },
+      {
+        path: 'favorite-days',
+        component: FavoriteDaysComponent,
       },
     ],
   },

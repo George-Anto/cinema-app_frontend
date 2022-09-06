@@ -57,19 +57,10 @@ export class SessionService {
     return this.http.get<any>(`${this.url}/sessions/favorite-days-and-genres`);
   }
 
-  // getSessionsOfFavoriteDaysAndGernesCult() {
-  //   return this.http.get<any>(
-  //     `${this.url}/sessions/favorite-days-and-genres-and-cult-movies`
-  //   );
-  // }
-
-  // getSessionsOfFavoriteDaysAndGernesFamily() {
-  //   return this.http.get<any>(
-  //     `${this.url}/sessions/favorite-days-and-genres-family`
-  //   );
-  // }
-
-  getSessionsOfFavoriteDays() {
+  getSessionsOfFavoriteDays(type: string) {
+    if (type === 'family') {
+      return this.http.get<any>(`${this.url}/sessions/favorite-days-family`);
+    }
     return this.http.get<any>(`${this.url}/sessions/favorite-days`);
   }
 

@@ -1,13 +1,12 @@
 <div class="screen">
   <div class="center">
-    <h1>Filtered Movies - Gernes - Days</h1>
-    <h1 class="border" *ngIf="cultMovies"><i>Cult Movies Edition</i></h1>
+    <h1>Filtered Movies - Favorite Days of the Week</h1>
     <h1 class="border" *ngIf="familyMovies"><i>Family Movies Edition</i></h1>
   </div>
   <div class="center">
     <h2>
-      Movies that match your favorite Gentres and that are available the days of
-      the week that you prefer!
+      Here you can see what is available the days of the week that you prefer
+      the most to go to the movies!
     </h2>
   </div>
   <mat-accordion multi="true" *ngIf="mySessions.length > 0">
@@ -72,8 +71,8 @@
   </mat-accordion>
 
   <p class="center alert alert-danger" *ngIf="error && !isLoading">
-    Please add your favorite movie gernes and the days you prefer to go to the
-    cinema so we can give you our suggestions! You can do that
+    Please add the days you prefer to go to the cinema so we can give you our
+    suggestions! You can do that
     <a routerLink="/main-menu/update-account">here</a>.
   </p>
   <p

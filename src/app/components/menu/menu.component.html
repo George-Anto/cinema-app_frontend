@@ -121,12 +121,29 @@
     ><span>My Favorite Days & Genres - Cult Movies</span></a
   >
   <a
+    *ngIf="hasChildren"
     routerLink="/main-menu/favorite-days-genres"
     [queryParams]="{ familyMovies: true }"
     routerLinkActive="active"
     class="list-group-item list-group-item-action py-2 ripple"
     ><i class="fas fa-list fa-fw me-3"></i
     ><span>My Favorite Days & Genres - Family Movies</span></a
+  >
+  <a
+    routerLink="/main-menu/favorite-days"
+    [queryParams]="{ allMovies: true }"
+    routerLinkActive="active"
+    class="list-group-item list-group-item-action py-2 ripple"
+    ><i class="fas fa-list fa-fw me-3"></i><span>My Favorite Days</span></a
+  >
+  <a
+    *ngIf="hasChildren"
+    routerLink="/main-menu/favorite-days"
+    [queryParams]="{ familyMovies: true }"
+    routerLinkActive="active"
+    class="list-group-item list-group-item-action py-2 ripple"
+    ><i class="fas fa-list fa-fw me-3"></i
+    ><span>My Favorite - Family Movies</span></a
   >
 </div>
 
