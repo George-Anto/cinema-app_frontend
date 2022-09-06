@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Session } from 'src/app/models/session.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { SessionService } from 'src/app/services/session.service';
@@ -14,18 +14,29 @@ export class FavoriteDaysAndGenresComponent implements OnInit {
   error: string = null;
   isLoading: boolean;
   isAdmin: boolean = false;
+  cultMovies: boolean;
+  familyMovies: boolean;
 
   constructor(
     private sessionService: SessionService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.isLoading = true;
-    this.getMySessions();
-    this.isLoading = false;
+    this.activatedRoute.queryParams.subscribe((params) => {
+      this.cultMovies = !!params.cultMovies;
+      this.familyMovies = !!params.familyMovies;
 
+      let type: string = 'all';
+      if (this.cultMovies) type = 'cult';
+      if (this.familyMovies) type = 'family';
+
+      this.isLoading = true;
+      this.getMySessions(type);
+      this.isLoading = false;
+    });
     this.authService.user
       .subscribe((user) => {
         if (user.role !== 'user') this.isAdmin = true;
@@ -33,8 +44,8 @@ export class FavoriteDaysAndGenresComponent implements OnInit {
       .unsubscribe();
   }
 
-  getMySessions() {
-    this.sessionService.getSessionsOfFavoriteDaysAndGernes().subscribe(
+  getMySessions(type: string) {
+    this.sessionService.getSessionsOfFavoriteDaysAndGernes(type).subscribe(
       (responseData) => {
         this.mySessions = responseData.data.data;
         console.log(this.mySessions);

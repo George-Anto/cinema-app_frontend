@@ -42,21 +42,32 @@ export class SessionService {
     return this.http.get<any>(`${this.url}/sessions/${sessionId}`);
   }
 
-  getSessionsOfFavoriteDaysAndGernes() {
+  getSessionsOfFavoriteDaysAndGernes(type: string) {
+    if (type === 'cult') {
+      return this.http.get<any>(
+        `${this.url}/sessions/favorite-days-and-genres-and-cult-movies`
+      );
+    }
+    if (type === 'family') {
+      return this.http.get<any>(
+        `${this.url}/sessions/favorite-days-and-genres-family`
+      );
+    }
+
     return this.http.get<any>(`${this.url}/sessions/favorite-days-and-genres`);
   }
 
-  getSessionsOfFavoriteDaysAndGernesCult() {
-    return this.http.get<any>(
-      `${this.url}/sessions/favorite-days-and-genres-and-cult-movies`
-    );
-  }
+  // getSessionsOfFavoriteDaysAndGernesCult() {
+  //   return this.http.get<any>(
+  //     `${this.url}/sessions/favorite-days-and-genres-and-cult-movies`
+  //   );
+  // }
 
-  getSessionsOfFavoriteDaysAndGernesFamily() {
-    return this.http.get<any>(
-      `${this.url}/sessions/favorite-days-and-genres-family`
-    );
-  }
+  // getSessionsOfFavoriteDaysAndGernesFamily() {
+  //   return this.http.get<any>(
+  //     `${this.url}/sessions/favorite-days-and-genres-family`
+  //   );
+  // }
 
   getSessionsOfFavoriteDays() {
     return this.http.get<any>(`${this.url}/sessions/favorite-days`);
