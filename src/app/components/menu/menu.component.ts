@@ -12,6 +12,7 @@ export class MenuComponent implements OnInit, OnDestroy {
   currentUser: Subscription;
   isAdmin: boolean = false;
   hasChildren: boolean;
+  hasFriends: boolean;
 
   constructor(private authService: AuthService) {}
 
@@ -19,6 +20,7 @@ export class MenuComponent implements OnInit, OnDestroy {
     this.currentUser = this.authService.user.subscribe((user) => {
       if (user?.role !== 'user') this.isAdmin = true;
       this.hasChildren = user?.hasChildren;
+      this.hasFriends = !!user?.friends.length;
     });
   }
 

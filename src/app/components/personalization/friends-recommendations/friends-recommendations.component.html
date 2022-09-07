@@ -1,0 +1,102 @@
+<div class="screen">
+  <div class="center">
+    <h1>Movies your Friends watched</h1>
+    <!-- <h1 class="border" *ngIf="familyMovies"><i>Family Movies Edition</i></h1> -->
+  </div>
+  <div class="center">
+    <h2>
+      Here you can see what movies your friends have attended in the past and
+      get ideas for your future visits at the cinemas.
+    </h2>
+  </div>
+  <mat-accordion multi="true" *ngIf="friendsMovies.length > 0">
+    <mat-expansion-panel *ngFor="let movie of friendsMovies">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <b>{{ movie.title | titlecase }}</b></mat-panel-title
+        >
+      </mat-expansion-panel-header>
+      <mat-list>
+        <mat-list-item> <b>Plot &nbsp;</b> : {{ movie.plot }} </mat-list-item>
+
+        <mat-list-item>
+          <b>Runtime</b> : {{ movie.runtime }}
+          <span *ngIf="movie.runtime > 10">&nbsp; minutes</span>
+        </mat-list-item>
+
+        <mat-list-item>
+          <b>Released Date</b> :
+          {{ movie.released.toString().substring(0, 10) }}
+        </mat-list-item>
+
+        <mat-list-item> <b>Year</b> : {{ movie.year }} </mat-list-item>
+
+        <mat-list-item>
+          <b>Fullplot &nbsp;</b> : {{ movie.fullplot }}
+        </mat-list-item>
+
+        <mat-list-item>
+          <b>Directors</b> : {{ movie.directors }}
+        </mat-list-item>
+
+        <mat-list-item> <b>Cast</b> : {{ movie.cast }} </mat-list-item>
+
+        <mat-list-item>
+          <b>IMDB - rating</b> : {{ movie.imdb.rating }} / &nbsp;<b>votes</b> :
+          {{ movie.imdb.votes }}
+        </mat-list-item>
+
+        <mat-list-item>
+          <b>Tomatoes - rating</b> : {{ movie.tomatoes.rating }} / &nbsp;
+          <b>votes</b> :
+          {{ movie.tomatoes.votes }}
+        </mat-list-item>
+
+        <mat-list-item>
+          <b>Movie Rating</b> : {{ movie.rating }}
+        </mat-list-item>
+
+        <mat-list-item *ngIf="movie.familyMovie">
+          <b>Family Movie</b>
+        </mat-list-item>
+        <mat-list-item *ngIf="movie.cultStatus">
+          <b>Cult Movie</b>
+        </mat-list-item>
+
+        <mat-list-item>
+          <span><b>Genre: </b> &nbsp;</span>
+          <div *ngIf="movie.genres.Action">Action &nbsp;</div>
+          <div *ngIf="movie.genres.Comedy">Comedy &nbsp;</div>
+          <div *ngIf="movie.genres.Drama">Drama &nbsp;</div>
+          <div *ngIf="movie.genres.Fantasy">Fantasy &nbsp;</div>
+          <div *ngIf="movie.genres.Horror">Horror &nbsp;</div>
+          <div *ngIf="movie.genres.Mustery">Mustery &nbsp;</div>
+          <div *ngIf="movie.genres.Romance">Romance &nbsp;</div>
+          <div *ngIf="movie.genres.Thriller">Thriller &nbsp;</div>
+          <div *ngIf="movie.genres.Western">Western &nbsp;</div>
+        </mat-list-item>
+      </mat-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <p
+    class="center alert alert-danger"
+    *ngIf="friendsMovies.length <= 0 && !isLoading"
+  >
+    Please add some friends to your account, to be able to see their
+    recommendations. You can do that
+    <a routerLink="/main-menu/friends-list">here</a>.
+  </p>
+  <p
+    class="center alert alert-danger"
+    *ngIf="friendsMovies.length <= 0 && !isLoading"
+  >
+    No movies that match your preferences could be found.
+  </p>
+  <div *ngIf="error" class="center alert alert-danger">
+    {{ error }}
+  </div>
+  <div *ngIf="isLoading">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+</div>

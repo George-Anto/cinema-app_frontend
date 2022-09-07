@@ -21,4 +21,8 @@ export class InvitationService {
       {}
     );
   }
+
+  getMyFriendsMovies() {
+    return this.http.get<any>(`${this.url}/invitations/your-friends-watched`);
+  }
 }

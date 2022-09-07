@@ -27,6 +27,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FriendsListComponent } from './components/friends-list/friends-list.component';
 import { FavoriteDaysAndGenresComponent } from './components/personalization/favorite-days-and-genres/favorite-days-and-genres.component';
 import { FavoriteDaysComponent } from './components/personalization/favorite-days/favorite-days.component';
+import { FriendsRecommendationsComponent } from './components/personalization/friends-recommendations/friends-recommendations.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -123,6 +124,10 @@ const routes: Routes = [
       {
         path: 'favorite-days',
         component: FavoriteDaysComponent,
+      },
+      {
+        path: 'what-my-friends-watched',
+        component: FriendsRecommendationsComponent,
       },
     ],
   },
