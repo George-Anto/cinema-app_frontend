@@ -64,6 +64,13 @@ export class SessionService {
     return this.http.get<any>(`${this.url}/sessions/favorite-days`);
   }
 
+  getSessionsOfFavoriteGenres(type: string) {
+    if (type === 'family') {
+      return this.http.get<any>(`${this.url}/sessions/favorite-genres-family`);
+    }
+    return this.http.get<any>(`${this.url}/sessions/favorite-genres`);
+  }
+
   editSession(
     id: string,
     code: number,

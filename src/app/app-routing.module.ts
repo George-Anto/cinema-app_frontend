@@ -28,6 +28,7 @@ import { FriendsListComponent } from './components/friends-list/friends-list.com
 import { FavoriteDaysAndGenresComponent } from './components/personalization/favorite-days-and-genres/favorite-days-and-genres.component';
 import { FavoriteDaysComponent } from './components/personalization/favorite-days/favorite-days.component';
 import { FriendsRecommendationsComponent } from './components/personalization/friends-recommendations/friends-recommendations.component';
+import { FavoriteGenresComponent } from './components/personalization/favorite-genres/favorite-genres.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -128,6 +129,10 @@ const routes: Routes = [
       {
         path: 'what-my-friends-watched',
         component: FriendsRecommendationsComponent,
+      },
+      {
+        path: 'favorite-genres',
+        component: FavoriteGenresComponent,
       },
     ],
   },

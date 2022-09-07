@@ -15,6 +15,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 // import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { GoogleMapsModule } from '@angular/google-maps';
 
@@ -59,6 +60,7 @@ import { FriendsListComponent } from './components/friends-list/friends-list.com
 import { FavoriteDaysAndGenresComponent } from './components/personalization/favorite-days-and-genres/favorite-days-and-genres.component';
 import { FavoriteDaysComponent } from './components/personalization/favorite-days/favorite-days.component';
 import { FriendsRecommendationsComponent } from './components/personalization/friends-recommendations/friends-recommendations.component';
+import { FavoriteGenresComponent } from './components/personalization/favorite-genres/favorite-genres.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +93,7 @@ import { FriendsRecommendationsComponent } from './components/personalization/fr
     FavoriteDaysAndGenresComponent,
     FavoriteDaysComponent,
     FriendsRecommendationsComponent,
+    FavoriteGenresComponent,
   ],
   imports: [
     BrowserModule,
@@ -114,6 +117,7 @@ import { FriendsRecommendationsComponent } from './components/personalization/fr
     GoogleMapsModule,
     MatSlideToggleModule,
     MatCheckboxModule,
+    MatMenuModule,
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,

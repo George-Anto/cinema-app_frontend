@@ -12,6 +12,19 @@
         <b>Plot</b>: {{ currentMovie?.plot }}
         <br />
         <b>Directors</b>: {{ currentMovie?.directors }}
+        <br />
+        <span><b>Genre: </b> &nbsp;</span>
+        <span *ngIf="currentMovie?.genres?.Action">Action &nbsp;</span>
+        <span *ngIf="currentMovie?.genres?.Comedy">Comedy &nbsp;</span>
+        <span *ngIf="currentMovie?.genres?.Drama">Drama &nbsp;</span>
+        <span *ngIf="currentMovie?.genres?.Fantasy">Fantasy &nbsp;</span>
+        <span *ngIf="currentMovie?.genres?.Horror">Horror &nbsp;</span>
+        <span *ngIf="currentMovie?.genres?.Mustery">Mustery &nbsp;</span>
+        <span *ngIf="currentMovie?.genres?.Romance">Romance &nbsp;</span>
+        <span *ngIf="currentMovie?.genres?.Thriller">Thriller &nbsp;</span>
+        <span *ngIf="currentMovie?.genres?.Western">Western &nbsp;</span>
+        <div *ngIf="currentMovie?.familyMovie"><b>Family Movie</b></div>
+        <div *ngIf="currentMovie?.cultStatus"><b>Cult Movie</b></div>
       </div>
       <div>
         <b>Cinema Hall</b>: {{ currentCinema?.name | titlecase }}
