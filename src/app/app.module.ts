@@ -61,6 +61,7 @@ import { FavoriteDaysAndGenresComponent } from './components/personalization/fav
 import { FavoriteDaysComponent } from './components/personalization/favorite-days/favorite-days.component';
 import { FriendsRecommendationsComponent } from './components/personalization/friends-recommendations/friends-recommendations.component';
 import { FavoriteGenresComponent } from './components/personalization/favorite-genres/favorite-genres.component';
+import { UserActivityStatsComponent } from './components/personalization/user-activity-stats/user-activity-stats.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +95,7 @@ import { FavoriteGenresComponent } from './components/personalization/favorite-g
     FavoriteDaysComponent,
     FriendsRecommendationsComponent,
     FavoriteGenresComponent,
+    UserActivityStatsComponent,
   ],
   imports: [
     BrowserModule,

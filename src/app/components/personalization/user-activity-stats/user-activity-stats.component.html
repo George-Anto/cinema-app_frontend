@@ -1,0 +1,127 @@
+<div class="screen">
+  <div class="center">
+    <h1 *ngIf="isAdmin">All User's Activity</h1>
+    <h1 *ngIf="!isAdmin">My Activity</h1>
+  </div>
+  <div class="center">
+    <div>
+      Here you can see how many of the movie sessions you have booked for you
+      and your guest's, you have also checked in.
+    </div>
+  </div>
+  <br />
+  <div *ngFor="let userStat of userStats">
+    <h3 *ngIf="!userStat.checkin">
+      You have booked &nbsp;<b>{{ userStat.count }}</b
+      >&nbsp; ticket<span *ngIf="userStat.count > 1">s</span> for the movies
+      that you have <b>not</b> checked in for.
+    </h3>
+
+    <h3 *ngIf="userStat.checkin">
+      You have booked &nbsp;<b>{{ userStat.count }}</b
+      >&nbsp; ticket<span *ngIf="userStat.count > 1">s</span>
+      for the movies that you have checked in for.
+    </h3>
+  </div>
+
+  <h3 *ngIf="invitationsCancelled.length <= 0 && !error">
+    You have <b>no</b> cancelled invitations.
+  </h3>
+  <div *ngIf="invitationsCancelled.length > 0">
+    <br />
+    <h2 style="text-align: center">
+      Cancelled Movie Session Invitation<span
+        *ngIf="invitationsCancelled.length > 1"
+        >s</span
+      >
+    </h2>
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let invitation of invitationsCancelled">
+        <mat-expansion-panel-header>
+          <mat-panel-title
+            ><b>{{ invitation.session.name }}</b></mat-panel-title
+          >
+        </mat-expansion-panel-header>
+        <mat-list>
+          <mat-list-item>
+            <b>Movie</b> : {{ invitation.movie.title | titlecase }}
+          </mat-list-item>
+          <mat-list-item>
+            <b>Cinema</b> : {{ invitation.cinema.name | titlecase }}
+          </mat-list-item>
+          <mat-list-item>
+            <b>Start Date</b> :
+            {{ invitation.session.startDate.toString().substring(0, 10) }}
+          </mat-list-item>
+          <mat-list-item>
+            <b>Start Time</b> :
+            {{ invitation.session.startTime.toString().substring(0, 10) }}
+          </mat-list-item>
+          <mat-list-item>
+            Reservation under &nbsp;<b>{{ invitation.email }}</b
+            >&nbsp; email address.
+          </mat-list-item>
+        </mat-list>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
+  <br />
+
+  <h2 *ngIf="isAdmin && invitationsValidButNotCheckedIn.length > 0">
+    All the user's Invitations that are valid but not yet checked in
+  </h2>
+
+  <h2 *ngIf="!isAdmin && invitationsValidButNotCheckedIn.length > 0">
+    All mine and my Guests' Invitations that are valid but not yet checked in
+  </h2>
+
+  <mat-accordion *ngIf="invitationsValidButNotCheckedIn.length > 0">
+    <mat-expansion-panel
+      *ngFor="let invitation of invitationsValidButNotCheckedIn"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title
+          ><b>{{ invitation.session.name }}</b></mat-panel-title
+        >
+      </mat-expansion-panel-header>
+      <mat-list>
+        <mat-list-item>
+          <b>Movie</b> : {{ invitation.movie.title | titlecase }}
+        </mat-list-item>
+        <mat-list-item>
+          <b>Cinema</b> : {{ invitation.cinema.name | titlecase }}
+        </mat-list-item>
+        <mat-list-item>
+          <b>Start Date</b> :
+          {{ invitation.session.startDate.toString().substring(0, 10) }}
+        </mat-list-item>
+        <mat-list-item>
+          <b>Start Time</b> :
+          {{ invitation.session.startTime.toString().substring(0, 10) }}
+        </mat-list-item>
+        <mat-list-item>
+          Reservation under &nbsp;<b>{{ invitation.email }}</b
+          >&nbsp; email address.
+        </mat-list-item>
+        <mat-list-item *ngIf="isAdmin">
+          <b>Under User</b> : {{ invitation.user.name }}
+          {{ invitation.user.surname }}
+        </mat-list-item>
+      </mat-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <br />
+
+  <div *ngIf="!isAdmin && invitationsValidButNotCheckedIn.length > 0">
+    Click <a routerLink="/main-menu/my-invitations">here</a> to check in.
+  </div>
+
+  <div *ngIf="error" class="center alert alert-danger">
+    {{ error }}
+  </div>
+  <div *ngIf="isLoading">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+</div>
