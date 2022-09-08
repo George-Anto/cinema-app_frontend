@@ -42,33 +42,46 @@ export class SessionService {
     return this.http.get<any>(`${this.url}/sessions/${sessionId}`);
   }
 
-  getSessionsOfFavoriteDaysAndGernes(type: string) {
+  getSessionsOfFavoriteDaysAndGernes(type: string, rating: string) {
+    let theRating: string = '';
+    if (rating && rating !== 'all') theRating = `?rating=${rating}`;
     if (type === 'cult') {
       return this.http.get<any>(
-        `${this.url}/sessions/favorite-days-and-genres-and-cult-movies`
+        `${this.url}/sessions/favorite-days-and-genres-and-cult-movies${theRating}`
       );
     }
     if (type === 'family') {
       return this.http.get<any>(
-        `${this.url}/sessions/favorite-days-and-genres-family`
+        `${this.url}/sessions/favorite-days-and-genres-family${theRating}`
       );
     }
-
-    return this.http.get<any>(`${this.url}/sessions/favorite-days-and-genres`);
+    return this.http.get<any>(
+      `${this.url}/sessions/favorite-days-and-genres${theRating}`
+    );
   }
 
-  getSessionsOfFavoriteDays(type: string) {
+  getSessionsOfFavoriteDays(type: string, rating: string) {
+    let theRating: string = '';
+    if (rating && rating !== 'all') theRating = `?rating=${rating}`;
     if (type === 'family') {
-      return this.http.get<any>(`${this.url}/sessions/favorite-days-family`);
+      return this.http.get<any>(
+        `${this.url}/sessions/favorite-days-family${theRating}`
+      );
     }
-    return this.http.get<any>(`${this.url}/sessions/favorite-days`);
+    return this.http.get<any>(`${this.url}/sessions/favorite-days${theRating}`);
   }
 
-  getSessionsOfFavoriteGenres(type: string) {
+  getSessionsOfFavoriteGenres(type: string, rating: string) {
+    let theRating: string = '';
+    if (rating && rating !== 'all') theRating = `?rating=${rating}`;
     if (type === 'family') {
-      return this.http.get<any>(`${this.url}/sessions/favorite-genres-family`);
+      return this.http.get<any>(
+        `${this.url}/sessions/favorite-genres-family${theRating}`
+      );
     }
-    return this.http.get<any>(`${this.url}/sessions/favorite-genres`);
+    return this.http.get<any>(
+      `${this.url}/sessions/favorite-genres${theRating}`
+    );
   }
 
   editSession(

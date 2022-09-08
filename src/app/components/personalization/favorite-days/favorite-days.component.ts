@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Session } from 'src/app/models/session.model';
 import { AuthService } from 'src/app/services/auth.service';
@@ -10,11 +11,14 @@ import { SessionService } from 'src/app/services/session.service';
   styleUrls: ['./favorite-days.component.css'],
 })
 export class FavoriteDaysComponent implements OnInit {
+  @ViewChild('ratingForm') ratingForm: NgForm;
   mySessions = [];
+  isThereAnError: boolean = false;
   error: string = null;
   isLoading: boolean;
   isAdmin: boolean = false;
   familyMovies: boolean;
+  type: string;
 
   constructor(
     private sessionService: SessionService,
@@ -27,11 +31,11 @@ export class FavoriteDaysComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe((params) => {
       this.familyMovies = !!params.familyMovies;
 
-      let type: string = 'all';
-      if (this.familyMovies) type = 'family';
+      this.type = 'all';
+      if (this.familyMovies) this.type = 'family';
 
       this.isLoading = true;
-      this.getMySessions(type);
+      this.getMySessions(this.type);
       this.isLoading = false;
     });
     this.authService.user
@@ -42,21 +46,29 @@ export class FavoriteDaysComponent implements OnInit {
   }
 
   getMySessions(type: string) {
-    this.sessionService.getSessionsOfFavoriteDays(type).subscribe(
-      (responseData) => {
-        this.mySessions = responseData.data.data;
-        console.log(this.mySessions);
-        console.log(this.mySessions[0]);
-        console.log(this.mySessions[0]?.movie_doc);
-        console.log(this.mySessions[0]?.movie_doc[0]);
-        console.log(this.mySessions[0]?.movie_doc[0].title);
-      },
-      (errorResponse) => {
-        console.log(errorResponse);
-        console.log(errorResponse.message);
-        this.showErrorMessage(errorResponse);
-      }
-    );
+    this.sessionService
+      .getSessionsOfFavoriteDays(type, this.ratingForm?.value?.rating)
+      .subscribe(
+        (responseData) => {
+          this.mySessions = responseData.data.data;
+          console.log(this.mySessions);
+          // console.log(this.mySessions[0]);
+          // console.log(this.mySessions[0]?.movie_doc);
+          // console.log(this.mySessions[0]?.movie_doc[0]);
+          // console.log(this.mySessions[0]?.movie_doc[0].title);
+        },
+        (errorResponse) => {
+          console.log(errorResponse);
+          console.log(errorResponse.message);
+          this.showErrorMessage(errorResponse);
+        }
+      );
+  }
+
+  onSendRating() {
+    this.isLoading = true;
+    this.getMySessions(this.type);
+    this.isLoading = false;
   }
 
   onBookSession(session) {
@@ -86,6 +98,8 @@ export class FavoriteDaysComponent implements OnInit {
       this.error = 'The end date must be greater than the start date.';
     } else if (errorResponse?.message.includes('Unknown Error')) {
       this.error = 'An error occured, please try again later.';
+    } else {
+      this.isThereAnError = true;
     }
   }
 }

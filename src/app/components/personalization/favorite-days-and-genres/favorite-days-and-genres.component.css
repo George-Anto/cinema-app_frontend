@@ -24,7 +24,7 @@
 
 .buttons-align {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .center {
