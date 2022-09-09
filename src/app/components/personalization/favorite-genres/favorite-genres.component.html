@@ -32,6 +32,37 @@
         </mat-list-item>
 
         <mat-list-item> <b>Time</b> : {{ session.startTime }} </mat-list-item>
+
+        <mat-list-item>
+          <b>Location</b> : {{ session.cinema_doc[0].location.longitude }} ,
+          {{ session.cinema_doc[0].location.latitude }}</mat-list-item
+        >
+        <!-- google-maps -->
+        <google-map
+          width="600px"
+          height="400px"
+          [center]="{
+            lat: session.cinema_doc[0].location.longitude,
+            lng: session.cinema_doc[0].location.latitude
+          }"
+        >
+          <map-marker
+            [position]="{
+              lat: session.cinema_doc[0].location.longitude,
+              lng: session.cinema_doc[0].location.latitude
+            }"
+            [label]="session.cinema_doc[0].name"
+          ></map-marker>
+
+          <map-marker
+            [position]="{
+              lat: usersLongitude,
+              lng: usersLatitude
+            }"
+            label="Your Address"
+          ></map-marker>
+          <map-info-window>Info Window content</map-info-window>
+        </google-map>
       </mat-list>
       <mat-action-row>
         <button mat-button color="primary" (click)="onBookSession(session)">
