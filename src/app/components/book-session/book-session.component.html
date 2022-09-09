@@ -25,6 +25,7 @@
         <span *ngIf="currentMovie?.genres?.Western">Western &nbsp;</span>
         <div *ngIf="currentMovie?.familyMovie"><b>Family Movie</b></div>
         <div *ngIf="currentMovie?.cultStatus"><b>Cult Movie</b></div>
+        <div><b>Rating</b> : {{ currentMovie?.rating }}</div>
       </div>
       <div>
         <b>Cinema Hall</b>: {{ currentCinema?.name | titlecase }}
