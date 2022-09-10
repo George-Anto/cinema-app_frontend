@@ -61,6 +61,38 @@
           </div>
           <div *ngIf="session.movie_doc[0].genres.Western">Western &nbsp;</div>
         </mat-list-item>
+
+        <mat-list-item>
+          <b>Location</b> : {{ session.cinema_doc[0].location.longitude }} ,
+          {{ session.cinema_doc[0].location.latitude }}</mat-list-item
+        >
+        <!-- google-maps -->
+        <google-map
+          width="600px"
+          height="400px"
+          [center]="{
+            lat: session.cinema_doc[0].location.longitude,
+            lng: session.cinema_doc[0].location.latitude
+          }"
+        >
+          <map-marker
+            [position]="{
+              lat: session.cinema_doc[0].location.longitude,
+              lng: session.cinema_doc[0].location.latitude
+            }"
+            [label]="session.cinema_doc[0].name"
+          ></map-marker>
+
+          <map-marker
+            *ngIf="isAddressPresent"
+            [position]="{
+              lat: usersLongitude,
+              lng: usersLatitude
+            }"
+            label="Your Address"
+          ></map-marker>
+          <map-info-window>Info Window content</map-info-window>
+        </google-map>
       </mat-list>
 
       <mat-action-row>
@@ -115,6 +147,41 @@
           [disabled]="!ratingForm.valid"
         >
           Filter by Rating
+        </button>
+      </div>
+    </form>
+  </mat-card>
+
+  <br />
+  <h3>
+    Filter also by the maximum distance that a cinema can have from the address
+    that you provided to us!
+  </h3>
+  <h3 *ngIf="!isAddressPresent" class="center alert alert-danger">
+    To use this feature, please update your address information. You can do that
+    <a routerLink="/main-menu/update-account">here</a>.
+  </h3>
+  <mat-card>
+    <form (submit)="onSendDistance()" #distanceForm="ngForm">
+      <h4><b>Select Maximum Distance:</b></h4>
+      <mat-form-field appearance="fill">
+        <mat-label>Choose Distance</mat-label>
+        <mat-select ngModel name="distance" required>
+          <mat-option value="all">All Cinemas</mat-option>
+          <mat-option value="5">5 km</mat-option>
+          <mat-option value="10">10 km</mat-option>
+          <mat-option value="20">20 km</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br />
+      <div class="buttons-align">
+        <button
+          mat-raised-button
+          color="accent"
+          type="submit"
+          [disabled]="!distanceForm.valid"
+        >
+          Filter by Distance
         </button>
       </div>
     </form>

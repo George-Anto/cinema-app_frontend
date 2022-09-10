@@ -55,6 +55,7 @@
           ></map-marker>
 
           <map-marker
+            *ngIf="isAddressPresent"
             [position]="{
               lat: usersLongitude,
               lng: usersLatitude
