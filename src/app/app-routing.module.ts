@@ -30,6 +30,7 @@ import { FavoriteDaysComponent } from './components/personalization/favorite-day
 import { FriendsRecommendationsComponent } from './components/personalization/friends-recommendations/friends-recommendations.component';
 import { FavoriteGenresComponent } from './components/personalization/favorite-genres/favorite-genres.component';
 import { UserActivityStatsComponent } from './components/personalization/user-activity-stats/user-activity-stats.component';
+import { ComingSoonComponent } from './components/personalization/coming-soon/coming-soon.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -138,6 +139,10 @@ const routes: Routes = [
       {
         path: 'user-activity',
         component: UserActivityStatsComponent,
+      },
+      {
+        path: 'favorite-genres-coming-soon',
+        component: ComingSoonComponent,
       },
     ],
   },

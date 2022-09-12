@@ -1,0 +1,107 @@
+<div class="screen">
+  <div class="center">
+    <h1>Coming Soon Movies - Stay Tuned!</h1>
+    <h1 class="border" *ngIf="cultMovies"><i>Cult Movies Edition</i></h1>
+    <h1 class="border" *ngIf="familyMovies">
+      <i>Family Movies Edition</i>
+    </h1>
+  </div>
+  <div class="center">
+    <h2>
+      Movies that match yor favorite Genres and that will be available in the
+      future!
+    </h2>
+  </div>
+  <mat-accordion multi="true" *ngIf="comingSoonMovies.length > 0">
+    <mat-expansion-panel *ngFor="let movie of comingSoonMovies">
+      <mat-expansion-panel-header>
+        <mat-panel-title
+          ><b>{{ movie.title | titlecase }}</b></mat-panel-title
+        >
+      </mat-expansion-panel-header>
+      <mat-list>
+        <!-- <span *ngIf="isAdmin">
+          <mat-list-item> <b>Code</b> : {{ movie._id }} </mat-list-item>
+        </span> -->
+
+        <mat-list-item> <b>Plot</b> : {{ movie.plot }} </mat-list-item>
+
+        <mat-list-item>
+          <b>Runtime</b> : {{ movie.runtime }}
+          <span *ngIf="movie.runtime > 10">&nbsp; minutes</span>
+        </mat-list-item>
+
+        <mat-list-item>
+          <b>Released Date</b> :
+          {{ movie.released.toString().substring(0, 10) }}
+        </mat-list-item>
+
+        <mat-list-item> <b>Year</b> : {{ movie.year }} </mat-list-item>
+
+        <mat-list-item>
+          <b>Fullplot &nbsp;</b> : {{ movie.fullplot }}
+        </mat-list-item>
+
+        <mat-list-item>
+          <b>Directors</b> : {{ movie.directors }}
+        </mat-list-item>
+
+        <mat-list-item> <b>Cast</b> : {{ movie.cast }} </mat-list-item>
+
+        <mat-list-item>
+          <b>IMDB - rating</b> : {{ movie.imdb.rating }} / &nbsp;<b>votes</b> :
+          {{ movie.imdb.votes }}
+        </mat-list-item>
+
+        <mat-list-item>
+          <b>Tomatoes - rating</b> : {{ movie.tomatoes.rating }} / &nbsp;
+          <b>votes</b> :
+          {{ movie.tomatoes.votes }}
+        </mat-list-item>
+
+        <mat-list-item>
+          <b>Movie Rating</b> : {{ movie.rating }}
+        </mat-list-item>
+
+        <mat-list-item *ngIf="movie.familyMovie">
+          <b>Family Movie</b>
+        </mat-list-item>
+        <mat-list-item *ngIf="movie.cultStatus">
+          <b>Cult Movie</b>
+        </mat-list-item>
+
+        <mat-list-item>
+          <span><b>Genre: </b> &nbsp;</span>
+          <div *ngIf="movie.genres.Action">Action &nbsp;</div>
+          <div *ngIf="movie.genres.Comedy">Comedy &nbsp;</div>
+          <div *ngIf="movie.genres.Drama">Drama &nbsp;</div>
+          <div *ngIf="movie.genres.Fantasy">Fantasy &nbsp;</div>
+          <div *ngIf="movie.genres.Horror">Horror &nbsp;</div>
+          <div *ngIf="movie.genres.Mustery">Mustery &nbsp;</div>
+          <div *ngIf="movie.genres.Romance">Romance &nbsp;</div>
+          <div *ngIf="movie.genres.Thriller">Thriller &nbsp;</div>
+          <div *ngIf="movie.genres.Western">Western &nbsp;</div>
+        </mat-list-item>
+      </mat-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <p class="center alert alert-danger" *ngIf="isThereAnError && !isLoading">
+    Please add your favorite movie gernes, so we can show you what will be
+    available in the future that match your preferences. You can do that
+    <a routerLink="/main-menu/update-account">here</a>.
+  </p>
+  <p
+    class="center alert alert-danger"
+    *ngIf="comingSoonMovies.length <= 0 && !isLoading && !error"
+  >
+    There are no new movies that match your favorite Genres for now. You can
+    book your favorite movie in a session that suits you!
+  </p>
+  <div *ngIf="error" class="center alert alert-danger">
+    {{ error }}
+  </div>
+  <div *ngIf="isLoading">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+</div>

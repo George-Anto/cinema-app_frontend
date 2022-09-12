@@ -64,6 +64,19 @@ export class MovieService {
     return this.http.get<any>(`${this.url}/movies/${movieId}`);
   }
 
+  getMoviesOfFavoriteGernes(type: string) {
+    if (type === 'cult') {
+      return this.http.get<any>(
+        `${this.url}/movies/favorite-genres-cult-movies`
+      );
+    }
+    if (type === 'family') {
+      return this.http.get<any>(`${this.url}/movies/favorite-genres-family`);
+    }
+
+    return this.http.get<any>(`${this.url}/movies/favorite-genres`);
+  }
+
   editMovie(
     id: string,
     title: string,
