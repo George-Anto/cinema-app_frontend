@@ -104,4 +104,35 @@
   <div *ngIf="isLoading">
     <app-loading-spinner></app-loading-spinner>
   </div>
+
+  <br />
+  <h3>You can also filter the results by the movie's rating!</h3>
+  <mat-card>
+    <form (submit)="onSendRating()" #ratingForm="ngForm">
+      <h4><b>Select Preferred Rating:</b></h4>
+      <mat-form-field appearance="fill">
+        <mat-label>Choose Rating</mat-label>
+        <mat-select ngModel name="rating" required>
+          <mat-option value="all">All Ratings</mat-option>
+          <mat-option value="Unrated">Unrated</mat-option>
+          <mat-option value="G">G</mat-option>
+          <mat-option value="PG">PG</mat-option>
+          <mat-option value="PG13">PG13</mat-option>
+          <mat-option value="R">R</mat-option>
+          <mat-option value="NC-17">NC-17</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br />
+      <div class="buttons-align">
+        <button
+          mat-raised-button
+          color="accent"
+          type="submit"
+          [disabled]="!ratingForm.valid"
+        >
+          Filter by Rating
+        </button>
+      </div>
+    </form>
+  </mat-card>
 </div>

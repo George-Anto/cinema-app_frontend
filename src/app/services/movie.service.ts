@@ -64,17 +64,21 @@ export class MovieService {
     return this.http.get<any>(`${this.url}/movies/${movieId}`);
   }
 
-  getMoviesOfFavoriteGernes(type: string) {
+  getMoviesOfFavoriteGernes(type: string, rating: string) {
+    let theRating: string = '';
+    if (rating && rating !== 'all') theRating = `?rating=${rating}`;
     if (type === 'cult') {
       return this.http.get<any>(
-        `${this.url}/movies/favorite-genres-cult-movies`
+        `${this.url}/movies/favorite-genres-cult-movies${theRating}`
       );
     }
     if (type === 'family') {
-      return this.http.get<any>(`${this.url}/movies/favorite-genres-family`);
+      return this.http.get<any>(
+        `${this.url}/movies/favorite-genres-family${theRating}`
+      );
     }
 
-    return this.http.get<any>(`${this.url}/movies/favorite-genres`);
+    return this.http.get<any>(`${this.url}/movies/favorite-genres${theRating}`);
   }
 
   editMovie(

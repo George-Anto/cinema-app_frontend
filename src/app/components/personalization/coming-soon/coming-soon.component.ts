@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Movie } from 'src/app/models/movie.model';
 import { Session } from 'src/app/models/session.model';
@@ -12,12 +13,14 @@ import { SessionService } from 'src/app/services/session.service';
   styleUrls: ['./coming-soon.component.css'],
 })
 export class ComingSoonComponent implements OnInit {
+  @ViewChild('ratingForm') ratingForm: NgForm;
   comingSoonMovies: Movie[] = [];
   error: string = null;
   isLoading: boolean;
   isAdmin: boolean = false;
   cultMovies: boolean;
   familyMovies: boolean;
+  type: string;
   isThereAnError: boolean = false;
 
   constructor(
@@ -32,12 +35,12 @@ export class ComingSoonComponent implements OnInit {
       this.cultMovies = !!params.cultMovies;
       this.familyMovies = !!params.familyMovies;
 
-      let type: string = 'all';
-      if (this.cultMovies) type = 'cult';
-      if (this.familyMovies) type = 'family';
+      this.type = 'all';
+      if (this.cultMovies) this.type = 'cult';
+      if (this.familyMovies) this.type = 'family';
 
       this.isLoading = true;
-      this.loadComingSoonMovies(type);
+      this.loadComingSoonMovies();
       this.isLoading = false;
     });
     this.authService.user
@@ -47,37 +50,37 @@ export class ComingSoonComponent implements OnInit {
       .unsubscribe();
   }
 
-  loadComingSoonMovies(type: string) {
+  loadComingSoonMovies() {
     this.sessionService.getSessions().subscribe(
       (responseData) => {
         const allSessions: Session[] = responseData.data.data;
-        console.log(allSessions);
-        this.movieService.getMoviesOfFavoriteGernes(type).subscribe(
-          (responseMovieData) => {
-            this.comingSoonMovies = responseMovieData.data.data;
-            console.log(this.comingSoonMovies);
+        this.movieService
+          .getMoviesOfFavoriteGernes(this.type, this.ratingForm?.value?.rating)
+          .subscribe(
+            (responseMovieData) => {
+              this.comingSoonMovies = responseMovieData.data.data;
 
-            for (let i = 0; i < this.comingSoonMovies.length; i++) {
-              const currentId = this.comingSoonMovies[i]._id;
+              for (let i = 0; i < this.comingSoonMovies.length; i++) {
+                const currentId = this.comingSoonMovies[i]._id;
 
-              let isIdPressent = false;
+                let isIdPressent = false;
 
-              allSessions.forEach((session) => {
-                if (session.movie._id === currentId) isIdPressent = true;
-              });
+                allSessions.forEach((session) => {
+                  if (session.movie._id === currentId) isIdPressent = true;
+                });
 
-              if (isIdPressent) {
-                this.comingSoonMovies.splice(i, 1);
-                i--;
+                if (isIdPressent) {
+                  this.comingSoonMovies.splice(i, 1);
+                  i--;
+                }
               }
+            },
+            (errorMovieData) => {
+              console.log(errorMovieData);
+              console.log(errorMovieData?.message);
+              this.isThereAnError = true;
             }
-          },
-          (errorMovieData) => {
-            console.log(errorMovieData);
-            console.log(errorMovieData?.message);
-            this.isThereAnError = true;
-          }
-        );
+          );
       },
       (errorData) => {
         console.log(errorData);
@@ -85,6 +88,14 @@ export class ComingSoonComponent implements OnInit {
         this.showErrorMessage(errorData);
       }
     );
+  }
+
+  onSendRating() {
+    if (!this.ratingForm.valid) return;
+
+    this.isLoading = true;
+    this.loadComingSoonMovies();
+    this.isLoading = false;
   }
 
   private showErrorMessage(errorResponse) {
