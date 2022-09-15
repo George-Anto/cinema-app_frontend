@@ -20,19 +20,19 @@
   overflow: auto;
 }
 
-.sidebar a {
+a {
   display: block;
   color: black;
   padding: 16px;
   text-decoration: none;
 }
 
-.sidebar a.active {
+a.active {
   background-color: #673ab7;
   color: white;
 }
 
-.sidebar a:hover:not(.active) {
+a:hover:not(.active) {
   background-color: #555;
   color: white;
 }
@@ -49,6 +49,11 @@ h2 {
 
 @media screen and (max-width: 700px) {
   .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar-right {
     width: 100%;
     height: auto;
     position: relative;

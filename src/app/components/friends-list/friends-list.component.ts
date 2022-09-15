@@ -75,7 +75,7 @@ export class FriendsListComponent implements OnInit {
         if (this.userData.friends.includes(theUser._id)) {
           this.isLoading = false;
           this.success = null;
-          this.error = 'You hava already that person in your friends list!';
+          this.error = 'You have already that person in your friends list!';
           return;
         }
 
