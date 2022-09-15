@@ -16,7 +16,8 @@
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
+  margin-right: 11rem;
 }
 
 .ticket {

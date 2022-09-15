@@ -6,7 +6,7 @@ $seat-unavailable-bg: black;
 $seat-unavailable-color: white; */
 
 .screen {
-  margin-left: 12rem;
+  margin-left: 4rem;
   width: 70%;
   margin-top: 100px;
   position: relative;

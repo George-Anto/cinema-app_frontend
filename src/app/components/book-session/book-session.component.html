@@ -142,7 +142,13 @@
   </div>
   <div *ngIf="bookPressed" class="book-center">
     <br />
-    <h2>You are about to book {{ totalSeats.length }} seat(s).</h2>
+    <h2>
+      You are about to book {{ totalSeats.length }} seat<span
+        *ngIf="totalSeats.length > 1"
+        >s</span
+      >
+      .
+    </h2>
     <h3>
       Please provide the personal emails of the peaple attending the movie.
     </h3>
