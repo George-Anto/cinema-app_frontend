@@ -27,7 +27,7 @@ export class AdminGuard implements CanActivate {
         if (user.role !== 'user') {
           return true;
         }
-        return this.router.createUrlTree(['/main-menu']);
+        return this.router.createUrlTree(['/main-menu/dashboard']);
       })
     );
   }
