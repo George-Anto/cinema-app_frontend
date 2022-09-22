@@ -8,7 +8,7 @@ import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'app-favorite-days-and-genres',
-  templateUrl: './favorite-days-and-genres.component.html',
+  templateUrl: './favorite-d-and-g.component.html',
   styleUrls: ['./favorite-days-and-genres.component.css'],
 })
 export class FavoriteDaysAndGenresComponent implements OnInit {
