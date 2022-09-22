@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { tap } from 'rxjs';
 import { Address, FavoriteDays, Genres, User } from '../models/user.model';
 import { AuthService } from './auth.service';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -121,5 +122,21 @@ export class UserService {
 
   deleteAccount() {
     return this.http.delete<any>(`${this.url}/users/deleteMe`);
+  }
+
+  //********* Cloud Patterns Additions *********
+
+  fetchMyReadOnlyLink() {
+    return this.http.get<any>(`${this.url}/users/fetchMyReadOnlyLink`);
+  }
+
+  fetchMyReadWriteLink() {
+    return this.http.get<any>(`${this.url}/users/fetchMyReadWriteLink`);
+  }
+
+  updateAccountImageAzurite(image: File, urlToUloadTo: string) {
+    const headers = new HttpHeaders().set('x-ms-blob-type', 'BlockBlob');
+
+    return this.http.put<any>(urlToUloadTo, image, { headers: headers });
   }
 }

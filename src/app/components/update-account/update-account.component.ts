@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { mimeType } from 'src/app/custom-validators/mime-type.validator';
 import { Address, FavoriteDays, Genres, User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
@@ -21,6 +25,9 @@ export class UpdateAccountComponent implements OnInit {
   userData = new User(null, null, null, null, null, null, null, null);
   imgUrl: string = 'http://localhost:3000/img/users/';
   imagePreview: string;
+  uploadNewImageLink: string;
+  isImageLoading: boolean;
+  azureImageConnectionRefused = false;
 
   constructor(
     private authService: AuthService,
@@ -30,6 +37,19 @@ export class UpdateAccountComponent implements OnInit {
   ngOnInit(): void {
     this.createForms();
     this.preFillForms();
+    this.initializeImageLink();
+  }
+
+  initializeImageLink() {
+    this.userService.fetchMyReadWriteLink().subscribe(
+      (responseData) => {
+        // console.log(responseData);
+        this.uploadNewImageLink = responseData.data.ReadWriteAzurelink;
+      },
+      (errorResponse) => {
+        console.log(errorResponse);
+      }
+    );
   }
 
   onPickImage(event: Event) {
@@ -47,11 +67,15 @@ export class UpdateAccountComponent implements OnInit {
 
   onSubmitImage() {
     if (!this.updateImageForm.valid) return;
+    if (!this.uploadNewImageLink) return;
 
     this.isLoading = true;
 
     this.userService
-      .updateAccountImage(this.updateImageForm.value.image)
+      .updateAccountImageAzurite(
+        this.updateImageForm.value.image,
+        this.uploadNewImageLink
+      )
       .subscribe(
         () => {
           this.isLoading = false;
@@ -78,7 +102,7 @@ export class UpdateAccountComponent implements OnInit {
 
     this.isLoading = true;
 
-    console.log(this.updateAccountForm.value);
+    // console.log(this.updateAccountForm.value);
 
     const favoriteDays: FavoriteDays = {
       monday: this.updateAccountForm.value.monday,
@@ -149,7 +173,9 @@ export class UpdateAccountComponent implements OnInit {
   createForms() {
     this.updateAccountForm = new UntypedFormGroup({
       name: new UntypedFormControl(null, { validators: [Validators.required] }),
-      surname: new UntypedFormControl(null, { validators: [Validators.required] }),
+      surname: new UntypedFormControl(null, {
+        validators: [Validators.required],
+      }),
       username: new UntypedFormControl(
         { value: null, disabled: true },
         { validators: [Validators.required] }
@@ -232,10 +258,7 @@ export class UpdateAccountComponent implements OnInit {
           colorBlind: user.isColorBlind,
         });
 
-        this.updateImageForm.patchValue({
-          image: `${this.imgUrl}${user.photo}`,
-        });
-
+        this.fetchMyProfilePhotoFromAzure();
         this.userData.id = user.id;
         this.userData.role = user.role;
         this.userData.jsonToken = user.jsonToken;
@@ -245,7 +268,6 @@ export class UpdateAccountComponent implements OnInit {
         this.userData.email = user.email;
         this.userData.mobilePhone = user.mobilePhone;
         this.userData.photo = `${this.imgUrl}${user.photo}`;
-        this.imagePreview = `${this.imgUrl}${user.photo}`;
         this.userData.age = user.age;
         this.userData.isColorBlind = user.isColorBlind;
         this.userData.favoriteDays = user.favoriteDays;
@@ -254,9 +276,48 @@ export class UpdateAccountComponent implements OnInit {
         this.userData.hasChildren = user.hasChildren;
         this.userData.friends = user.friends;
 
-        console.log(this.userData);
+        // console.log(this.userData);
       })
       .unsubscribe();
+  }
+
+  private fetchMyProfilePhotoFromAzure() {
+    this.isImageLoading = true;
+    this.userService.fetchMyReadOnlyLink().subscribe(
+      (responseData) => {
+        // console.log(responseData);
+        if (
+          responseData.BlobStorageConnectionStatus === 'Connected' &&
+          responseData.data.BlobSize > 0
+        ) {
+          this.updateImageForm.patchValue({
+            image: responseData.data.readOnlyAzureLink,
+          });
+          this.imagePreview = responseData.data.readOnlyAzurelink;
+        } else if (
+          responseData.BlobStorageConnectionStatus === 'Unable to connect'
+        ) {
+          this.useDefaultImage();
+          this.azureImageConnectionRefused = true;
+        } else {
+          this.useDefaultImage();
+        }
+        this.isImageLoading = false;
+      },
+      (errorResponse) => {
+        console.log(errorResponse);
+        this.useDefaultImage();
+        this.isImageLoading = false;
+        this.azureImageConnectionRefused = true;
+      }
+    );
+  }
+
+  private useDefaultImage() {
+    this.updateImageForm.patchValue({
+      image: '../../../assets/images/default.jpg',
+    });
+    this.imagePreview = '../../../assets/images/default.jpg';
   }
 
   private showErrorMessage(errorResponse) {

@@ -14,6 +14,20 @@
       <div class="image" *ngIf="imagePreview">
         <img [src]="imagePreview" [alt]="userData.surname" />
       </div>
+      <div *ngIf="isImageLoading" class="spinner">
+        <app-loading-spinner></app-loading-spinner>
+        <br />
+        <span
+          ><b
+            >Fetching Image from Azure Blob Storage.
+            <br />
+            We will retry connection 3 times.</b
+          ></span
+        >
+      </div>
+    </div>
+    <div *ngIf="azureImageConnectionRefused">
+      <b>Could not connect to Azure Blob Storage. Default Photo is used.</b>
     </div>
     <input
       type="file"
