@@ -6,7 +6,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-The frontend module of the Cinema App. 
+The frontend module of the Cinema App. (Backend Link `https://github.com/George-Anto/cinema_app_backend`)
 It navigates the user to all of our application's different capabilities.
 The admin-user can manage all the cinema halls, movies and sessions.
 The simple user can search for films/sessions and book their tickets, for them and their friends.
